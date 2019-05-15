@@ -4,3 +4,184 @@ INFO 2019-05-15 03:00:00,824 basehttp 124 "GET / HTTP/1.1" 200 1716
 INFO 2019-05-15 03:00:16,088 basehttp 124 "GET /static/1024.jpg HTTP/1.1" 200 161647
 WARNING 2019-05-15 03:00:16,180 base 152 Not Found: /favicon.ico
 WARNING 2019-05-15 03:00:16,182 basehttp 124 "GET /favicon.ico HTTP/1.1" 404 1966
+WARNING 2019-05-15 10:24:28,717 base 152 Not Found: /
+WARNING 2019-05-15 10:24:28,721 basehttp 124 "GET / HTTP/1.1" 404 2245
+WARNING 2019-05-15 10:24:34,662 base 152 Not Found: /
+WARNING 2019-05-15 10:24:34,665 basehttp 124 "GET / HTTP/1.1" 404 2245
+ERROR 2019-05-15 10:24:35,049 exception 135 Internal Server Error: /register/
+Traceback (most recent call last):
+  File "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/虚拟环境/lib/python3.6/site-packages/django/template/utils.py", line 65, in __getitem__
+    return self._engines[alias]
+KeyError: 'jinja2'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/虚拟环境/lib/python3.6/site-packages/django/core/handlers/exception.py", line 41, in inner
+    response = get_response(request)
+  File "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/虚拟环境/lib/python3.6/site-packages/django/core/handlers/base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/虚拟环境/lib/python3.6/site-packages/django/core/handlers/base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/虚拟环境/lib/python3.6/site-packages/django/views/generic/base.py", line 68, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/虚拟环境/lib/python3.6/site-packages/django/views/generic/base.py", line 88, in dispatch
+    return handler(request, *args, **kwargs)
+  File "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/meiduo_mall/apps/users/views.py", line 15, in get
+    return render(request, 'register.html')
+  File "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/虚拟环境/lib/python3.6/site-packages/django/shortcuts.py", line 30, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/虚拟环境/lib/python3.6/site-packages/django/template/loader.py", line 67, in render_to_string
+    template = get_template(template_name, using=using)
+  File "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/虚拟环境/lib/python3.6/site-packages/django/template/loader.py", line 18, in get_template
+    engines = _engine_list(using)
+  File "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/虚拟环境/lib/python3.6/site-packages/django/template/loader.py", line 72, in _engine_list
+    return engines.all() if using is None else [engines[using]]
+  File "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/虚拟环境/lib/python3.6/site-packages/django/template/utils.py", line 89, in all
+    return [self[alias] for alias in self]
+  File "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/虚拟环境/lib/python3.6/site-packages/django/template/utils.py", line 89, in <listcomp>
+    return [self[alias] for alias in self]
+  File "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/虚拟环境/lib/python3.6/site-packages/django/template/utils.py", line 80, in __getitem__
+    engine = engine_cls(params)
+  File "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/虚拟环境/lib/python3.6/site-packages/django/template/backends/jinja2.py", line 29, in __init__
+    environment_cls = import_string(environment)
+  File "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/虚拟环境/lib/python3.6/site-packages/django/utils/module_loading.py", line 20, in import_string
+    module = import_module(module_path)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 994, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 971, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 953, in _find_and_load_unlocked
+ModuleNotFoundError: No module named 'meiduo_mall.utils.jinja2_env'
+ERROR 2019-05-15 10:24:35,186 basehttp 124 "GET /register/ HTTP/1.1" 500 120306
+ERROR 2019-05-15 10:24:37,364 exception 135 Internal Server Error: /register/
+Traceback (most recent call last):
+  File "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/虚拟环境/lib/python3.6/site-packages/django/template/utils.py", line 65, in __getitem__
+    return self._engines[alias]
+KeyError: 'jinja2'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/虚拟环境/lib/python3.6/site-packages/django/core/handlers/exception.py", line 41, in inner
+    response = get_response(request)
+  File "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/虚拟环境/lib/python3.6/site-packages/django/core/handlers/base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/虚拟环境/lib/python3.6/site-packages/django/core/handlers/base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/虚拟环境/lib/python3.6/site-packages/django/views/generic/base.py", line 68, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/虚拟环境/lib/python3.6/site-packages/django/views/generic/base.py", line 88, in dispatch
+    return handler(request, *args, **kwargs)
+  File "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/meiduo_mall/apps/users/views.py", line 15, in get
+    return render(request, 'register.html')
+  File "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/虚拟环境/lib/python3.6/site-packages/django/shortcuts.py", line 30, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/虚拟环境/lib/python3.6/site-packages/django/template/loader.py", line 67, in render_to_string
+    template = get_template(template_name, using=using)
+  File "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/虚拟环境/lib/python3.6/site-packages/django/template/loader.py", line 18, in get_template
+    engines = _engine_list(using)
+  File "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/虚拟环境/lib/python3.6/site-packages/django/template/loader.py", line 72, in _engine_list
+    return engines.all() if using is None else [engines[using]]
+  File "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/虚拟环境/lib/python3.6/site-packages/django/template/utils.py", line 89, in all
+    return [self[alias] for alias in self]
+  File "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/虚拟环境/lib/python3.6/site-packages/django/template/utils.py", line 89, in <listcomp>
+    return [self[alias] for alias in self]
+  File "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/虚拟环境/lib/python3.6/site-packages/django/template/utils.py", line 80, in __getitem__
+    engine = engine_cls(params)
+  File "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/虚拟环境/lib/python3.6/site-packages/django/template/backends/jinja2.py", line 29, in __init__
+    environment_cls = import_string(environment)
+  File "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/虚拟环境/lib/python3.6/site-packages/django/utils/module_loading.py", line 20, in import_string
+    module = import_module(module_path)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 994, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 971, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 953, in _find_and_load_unlocked
+ModuleNotFoundError: No module named 'meiduo_mall.utils.jinja2_env'
+ERROR 2019-05-15 10:24:37,436 basehttp 124 "GET /register/ HTTP/1.1" 500 120306
+ERROR 2019-05-15 10:24:41,971 exception 135 Internal Server Error: /register/
+Traceback (most recent call last):
+  File "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/虚拟环境/lib/python3.6/site-packages/django/template/utils.py", line 65, in __getitem__
+    return self._engines[alias]
+KeyError: 'jinja2'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/虚拟环境/lib/python3.6/site-packages/django/core/handlers/exception.py", line 41, in inner
+    response = get_response(request)
+  File "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/虚拟环境/lib/python3.6/site-packages/django/core/handlers/base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/虚拟环境/lib/python3.6/site-packages/django/core/handlers/base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/虚拟环境/lib/python3.6/site-packages/django/views/generic/base.py", line 68, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/虚拟环境/lib/python3.6/site-packages/django/views/generic/base.py", line 88, in dispatch
+    return handler(request, *args, **kwargs)
+  File "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/meiduo_mall/apps/users/views.py", line 15, in get
+    return render(request, 'register.html')
+  File "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/虚拟环境/lib/python3.6/site-packages/django/shortcuts.py", line 30, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/虚拟环境/lib/python3.6/site-packages/django/template/loader.py", line 67, in render_to_string
+    template = get_template(template_name, using=using)
+  File "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/虚拟环境/lib/python3.6/site-packages/django/template/loader.py", line 18, in get_template
+    engines = _engine_list(using)
+  File "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/虚拟环境/lib/python3.6/site-packages/django/template/loader.py", line 72, in _engine_list
+    return engines.all() if using is None else [engines[using]]
+  File "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/虚拟环境/lib/python3.6/site-packages/django/template/utils.py", line 89, in all
+    return [self[alias] for alias in self]
+  File "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/虚拟环境/lib/python3.6/site-packages/django/template/utils.py", line 89, in <listcomp>
+    return [self[alias] for alias in self]
+  File "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/虚拟环境/lib/python3.6/site-packages/django/template/utils.py", line 80, in __getitem__
+    engine = engine_cls(params)
+  File "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/虚拟环境/lib/python3.6/site-packages/django/template/backends/jinja2.py", line 29, in __init__
+    environment_cls = import_string(environment)
+  File "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/虚拟环境/lib/python3.6/site-packages/django/utils/module_loading.py", line 20, in import_string
+    module = import_module(module_path)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 994, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 971, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 953, in _find_and_load_unlocked
+ModuleNotFoundError: No module named 'meiduo_mall.utils.jinja2_env'
+ERROR 2019-05-15 10:24:42,043 basehttp 124 "GET /register/ HTTP/1.1" 500 120306
+INFO 2019-05-15 10:25:10,013 basehttp 124 "GET /register/ HTTP/1.1" 200 3356
+WARNING 2019-05-15 10:25:10,047 base 152 Not Found: /register/css/reset.css
+WARNING 2019-05-15 10:25:10,048 base 152 Not Found: /register/css/main.css
+WARNING 2019-05-15 10:25:10,053 base 152 Not Found: /register/js/host.js
+WARNING 2019-05-15 10:25:10,058 basehttp 124 "GET /register/css/reset.css HTTP/1.1" 404 2329
+WARNING 2019-05-15 10:25:10,068 base 152 Not Found: /register/images/logo.png
+WARNING 2019-05-15 10:25:10,074 base 152 Not Found: /register/js/common.js
+WARNING 2019-05-15 10:25:10,081 base 152 Not Found: /register/js/axios-0.18.0.min.js
+WARNING 2019-05-15 10:25:10,104 base 152 Not Found: /register/js/vue-2.5.16.js
+WARNING 2019-05-15 10:25:10,112 base 152 Not Found: /register/js/register.js
+WARNING 2019-05-15 10:25:10,112 basehttp 124 "GET /register/css/main.css HTTP/1.1" 404 2326
+WARNING 2019-05-15 10:25:10,113 basehttp 124 "GET /register/js/host.js HTTP/1.1" 404 2320
+WARNING 2019-05-15 10:25:10,120 base 152 Not Found: /register/images/pic_code.jpg
+WARNING 2019-05-15 10:25:10,121 basehttp 124 "GET /register/images/logo.png HTTP/1.1" 404 2335
+WARNING 2019-05-15 10:25:10,123 basehttp 124 "GET /register/js/common.js HTTP/1.1" 404 2326
+WARNING 2019-05-15 10:25:10,123 basehttp 124 "GET /register/js/axios-0.18.0.min.js HTTP/1.1" 404 2356
+WARNING 2019-05-15 10:25:10,124 basehttp 124 "GET /register/js/vue-2.5.16.js HTTP/1.1" 404 2338
+WARNING 2019-05-15 10:25:10,126 basehttp 124 "GET /register/js/register.js HTTP/1.1" 404 2332
+WARNING 2019-05-15 10:25:10,131 basehttp 124 "GET /register/images/pic_code.jpg HTTP/1.1" 404 2347
+WARNING 2019-05-15 10:25:10,141 base 152 Not Found: /register/images/logo.png
+WARNING 2019-05-15 10:25:10,142 basehttp 124 "GET /register/images/logo.png HTTP/1.1" 404 2335
+INFO 2019-05-15 10:34:31,831 basehttp 124 "GET /register/ HTTP/1.1" 200 3466
+INFO 2019-05-15 10:34:31,862 basehttp 124 "GET /static/css/reset.css HTTP/1.1" 200 638
+INFO 2019-05-15 10:34:31,863 basehttp 124 "GET /static/images/logo.png HTTP/1.1" 200 7450
+INFO 2019-05-15 10:34:31,863 basehttp 124 "GET /static/js/host.js HTTP/1.1" 200 75
+INFO 2019-05-15 10:34:31,864 basehttp 124 "GET /static/js/axios-0.18.0.min.js HTTP/1.1" 200 12941
+INFO 2019-05-15 10:34:31,866 basehttp 124 "GET /static/css/main.css HTTP/1.1" 200 39722
+INFO 2019-05-15 10:34:31,876 basehttp 124 "GET /static/js/common.js HTTP/1.1" 200 891
+INFO 2019-05-15 10:34:31,882 basehttp 124 "GET /static/images/pic_code.jpg HTTP/1.1" 200 4507
+INFO 2019-05-15 10:34:31,888 basehttp 124 "GET /static/js/vue-2.5.16.js HTTP/1.1" 200 289307
+INFO 2019-05-15 10:34:31,889 basehttp 124 "GET /static/js/register.js HTTP/1.1" 200 15584
+INFO 2019-05-15 10:34:31,988 basehttp 124 "GET /static/images/icons02.png HTTP/1.1" 200 3935
+INFO 2019-05-15 10:34:31,989 basehttp 124 "GET /static/images/interval_line.png HTTP/1.1" 200 1123
+INFO 2019-05-15 10:34:31,992 basehttp 124 "GET /static/images/register_banner.png HTTP/1.1" 200 54894
+WARNING 2019-05-15 10:46:46,809 base 152 Not Found: /
+WARNING 2019-05-15 10:46:46,809 basehttp 124 "GET / HTTP/1.1" 404 2245
+WARNING 2019-05-15 10:50:47,799 base 152 Not Found: /
+WARNING 2019-05-15 10:50:47,802 basehttp 124 "GET / HTTP/1.1" 404 2245
+INFO 2019-05-15 10:50:52,640 basehttp 124 "GET /register/ HTTP/1.1" 200 3466
