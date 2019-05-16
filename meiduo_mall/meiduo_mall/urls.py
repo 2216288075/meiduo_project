@@ -15,9 +15,10 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
-import meiduo_mall.apps.users
 
 urlpatterns = [
     url('admin/', admin.site.urls),
-    url(r'^', include('users.urls', namespace='users'))
+    url(r'^', include('users.urls', namespace='users')),
+    url(r'^', include('contents.urls', namespace='contents')),
+    url(r'^', include('verifications.urls')),
 ]
