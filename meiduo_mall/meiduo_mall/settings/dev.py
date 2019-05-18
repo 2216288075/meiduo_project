@@ -25,8 +25,9 @@ SECRET_KEY = '91dc6wh47%t+65+gg%fjkecnd+yuy(h$o(t&ngorb^%e*1)y*l'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
+#python manage.py runserver 192.168.100.2:8080
 
 # Application definition
 
@@ -154,6 +155,18 @@ CACHES = {
 }
 SESSION_ENGINE = "django.contrib.sessions.backends.cache"
 SESSION_CACHE_ALIAS = "session"
+
+
+import logging
+
+# 创建日志记录器
+logger = logging.getLogger('django')
+# 输出日志
+logger.debug('测试logging模块debug')
+logger.info('测试logging模块info')
+logger.error('测试logging模块error')
+
+
 
 LOGGING = {
     'version': 1,
