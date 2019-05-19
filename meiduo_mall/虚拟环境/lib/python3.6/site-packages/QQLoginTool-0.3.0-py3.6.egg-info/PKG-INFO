@@ -1,0 +1,11 @@
+Metadata-Version: 1.0
+Name: QQLoginTool
+Version: 0.3.0
+Summary: time and path tool
+Home-page: https://github.com/AugustHub/QQLogin.git
+Author: august
+Author-email: august@163.com
+License: MIT Licence
+Description: time and path tool
+Keywords: pip,pathtool,timetool,magetool,mage
+Platform: any
