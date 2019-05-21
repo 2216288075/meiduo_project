@@ -5244,3 +5244,451 @@ WARNING 2019-05-19 13:23:43,647 basehttp 124 "GET /browse_histories/ HTTP/1.1" 4
 INFO 2019-05-19 13:24:35,942 basehttp 124 "GET / HTTP/1.1" 200 25326
 WARNING 2019-05-19 13:24:35,979 base 152 Not Found: /carts/simple/
 WARNING 2019-05-19 13:24:35,980 basehttp 124 "GET /carts/simple/ HTTP/1.1" 404 4399
+WARNING 2019-05-20 02:33:54,863 base 152 Not Found: /carts/simple/
+WARNING 2019-05-20 02:33:54,871 basehttp 124 "GET /carts/simple/ HTTP/1.1" 404 4568
+INFO 2019-05-20 02:33:54,907 basehttp 124 "GET / HTTP/1.1" 200 25326
+INFO 2019-05-20 02:33:59,427 basehttp 124 "GET /static/cart.html HTTP/1.1" 200 4624
+INFO 2019-05-20 02:33:59,450 basehttp 124 "GET /static/js/cart.js HTTP/1.1" 200 18210
+WARNING 2019-05-20 02:34:00,612 base 152 Not Found: /favicon.ico
+WARNING 2019-05-20 02:34:00,613 basehttp 124 "GET /favicon.ico HTTP/1.1" 404 4562
+WARNING 2019-05-20 02:35:09,585 base 152 Not Found: /aaa/
+WARNING 2019-05-20 02:35:09,588 basehttp 124 "GET /aaa/ HTTP/1.1" 404 4541
+WARNING 2019-05-20 02:35:09,914 base 152 Not Found: /carts/simple/
+INFO 2019-05-20 02:35:09,916 basehttp 124 "GET / HTTP/1.1" 200 25326
+WARNING 2019-05-20 02:35:09,916 basehttp 124 "GET /carts/simple/ HTTP/1.1" 404 4568
+WARNING 2019-05-20 02:35:18,068 base 93 Method Not Allowed (GET): /carts/
+WARNING 2019-05-20 02:35:18,069 basehttp 124 "GET /carts/ HTTP/1.1" 405 0
+WARNING 2019-05-20 02:35:18,191 base 152 Not Found: /favicon.ico
+WARNING 2019-05-20 02:35:18,191 basehttp 124 "GET /favicon.ico HTTP/1.1" 404 4562
+WARNING 2019-05-20 02:48:09,355 base 152 Not Found: /carts/simple/
+WARNING 2019-05-20 02:48:09,357 basehttp 124 "GET /carts/simple/ HTTP/1.1" 404 4568
+INFO 2019-05-20 02:48:09,415 basehttp 124 "GET / HTTP/1.1" 200 25408
+INFO 2019-05-20 02:48:11,576 basehttp 124 "GET /carts/ HTTP/1.1" 200 4186
+WARNING 2019-05-20 02:48:15,982 base 152 Not Found: /carts/login.html
+WARNING 2019-05-20 02:48:15,982 basehttp 124 "GET /carts/login.html HTTP/1.1" 404 4577
+WARNING 2019-05-20 02:48:16,051 base 152 Not Found: /favicon.ico
+WARNING 2019-05-20 02:48:16,052 basehttp 124 "GET /favicon.ico HTTP/1.1" 404 4562
+INFO 2019-05-20 02:48:26,431 basehttp 124 "GET /carts/ HTTP/1.1" 200 4186
+INFO 2019-05-20 02:48:27,469 basehttp 124 "GET / HTTP/1.1" 200 25408
+WARNING 2019-05-20 02:48:27,491 base 152 Not Found: /carts/simple/
+WARNING 2019-05-20 02:48:27,492 basehttp 124 "GET /carts/simple/ HTTP/1.1" 404 4568
+WARNING 2019-05-20 02:48:28,108 base 152 Not Found: /carts/simple/
+INFO 2019-05-20 02:48:28,109 basehttp 124 "GET / HTTP/1.1" 200 25408
+WARNING 2019-05-20 02:48:28,113 basehttp 124 "GET /carts/simple/ HTTP/1.1" 404 4568
+INFO 2019-05-20 02:48:30,929 basehttp 124 "GET /logout/ HTTP/1.1" 302 0
+INFO 2019-05-20 02:48:30,951 basehttp 124 "GET / HTTP/1.1" 200 25408
+WARNING 2019-05-20 02:48:31,050 base 152 Not Found: /carts/simple/
+WARNING 2019-05-20 02:48:31,050 basehttp 124 "GET /carts/simple/ HTTP/1.1" 404 4568
+INFO 2019-05-20 02:48:31,832 basehttp 124 "GET /login/ HTTP/1.1" 200 3837
+INFO 2019-05-20 02:48:39,187 basehttp 124 "POST /login/ HTTP/1.1" 302 0
+INFO 2019-05-20 02:48:39,202 basehttp 124 "GET / HTTP/1.1" 200 25408
+WARNING 2019-05-20 02:48:39,297 base 152 Not Found: /carts/simple/
+WARNING 2019-05-20 02:48:39,298 basehttp 124 "GET /carts/simple/ HTTP/1.1" 404 4568
+ERROR 2019-05-20 02:48:42,226 exception 135 Internal Server Error: /carts/
+Traceback (most recent call last):
+  File "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/虚拟环境/lib/python3.6/site-packages/django/core/handlers/exception.py", line 41, in inner
+    response = get_response(request)
+  File "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/虚拟环境/lib/python3.6/site-packages/django/core/handlers/base.py", line 198, in _get_response
+    "returned None instead." % (callback.__module__, view_name)
+ValueError: The view carts.views.CartsView didn't return an HttpResponse object. It returned None instead.
+ERROR 2019-05-20 02:48:42,291 basehttp 124 "GET /carts/ HTTP/1.1" 500 59650
+INFO 2019-05-20 02:49:45,062 basehttp 124 "GET / HTTP/1.1" 200 25408
+WARNING 2019-05-20 02:49:45,063 base 152 Not Found: /carts/simple/
+WARNING 2019-05-20 02:49:45,065 basehttp 124 "GET /carts/simple/ HTTP/1.1" 404 4568
+INFO 2019-05-20 02:49:47,143 basehttp 124 "GET /info/ HTTP/1.1" 200 7013
+WARNING 2019-05-20 02:49:47,261 base 152 Not Found: /browse_histories/
+WARNING 2019-05-20 02:49:47,262 basehttp 124 "GET /browse_histories/ HTTP/1.1" 404 4580
+ERROR 2019-05-20 02:49:54,573 exception 135 Internal Server Error: /carts/
+Traceback (most recent call last):
+  File "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/虚拟环境/lib/python3.6/site-packages/django/core/handlers/exception.py", line 41, in inner
+    response = get_response(request)
+  File "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/虚拟环境/lib/python3.6/site-packages/django/core/handlers/base.py", line 198, in _get_response
+    "returned None instead." % (callback.__module__, view_name)
+ValueError: The view carts.views.CartsView didn't return an HttpResponse object. It returned None instead.
+ERROR 2019-05-20 02:49:54,629 basehttp 124 "GET /carts/ HTTP/1.1" 500 59655
+WARNING 2019-05-20 02:50:05,647 base 152 Not Found: /carts/simple/
+WARNING 2019-05-20 02:50:05,655 basehttp 124 "GET /carts/simple/ HTTP/1.1" 404 4568
+INFO 2019-05-20 02:50:05,655 basehttp 124 "GET /logout/ HTTP/1.1" 302 0
+INFO 2019-05-20 02:50:05,664 basehttp 124 "GET / HTTP/1.1" 200 25408
+INFO 2019-05-20 02:50:07,123 basehttp 124 "GET /carts/ HTTP/1.1" 200 4186
+WARNING 2019-05-20 02:50:12,067 base 152 Not Found: /browse_histories/
+WARNING 2019-05-20 02:50:12,068 basehttp 124 "GET /browse_histories/ HTTP/1.1" 404 4580
+INFO 2019-05-20 02:50:12,072 basehttp 124 "GET /info/ HTTP/1.1" 302 0
+INFO 2019-05-20 02:50:12,080 basehttp 124 "GET /login/?next=/info/ HTTP/1.1" 200 3837
+INFO 2019-05-20 07:23:50,013 basehttp 124 "GET /carts/simple/ HTTP/1.1" 200 46
+INFO 2019-05-20 07:23:50,040 basehttp 124 "GET / HTTP/1.1" 200 25347
+INFO 2019-05-20 07:23:51,969 basehttp 124 "GET /carts/simple/ HTTP/1.1" 200 46
+INFO 2019-05-20 07:23:53,162 basehttp 124 "GET /carts/ HTTP/1.1" 200 4186
+INFO 2019-05-20 07:23:57,199 basehttp 124 "GET /carts/simple/ HTTP/1.1" 200 46
+INFO 2019-05-20 07:23:57,987 basehttp 124 "GET /carts/ HTTP/1.1" 200 4186
+INFO 2019-05-20 07:24:00,376 basehttp 124 "GET /carts/simple/ HTTP/1.1" 200 46
+INFO 2019-05-20 07:24:28,400 basehttp 124 "GET /carts/simple/ HTTP/1.1" 200 46
+INFO 2019-05-20 08:51:52,838 basehttp 124 "GET /carts/simple/ HTTP/1.1" 200 46
+INFO 2019-05-20 08:51:52,871 basehttp 124 "GET / HTTP/1.1" 200 25337
+INFO 2019-05-20 08:51:54,551 basehttp 124 "GET /login/ HTTP/1.1" 200 3837
+INFO 2019-05-20 08:52:02,622 basehttp 124 "POST /login/ HTTP/1.1" 302 0
+INFO 2019-05-20 08:52:02,632 basehttp 124 "GET / HTTP/1.1" 200 25337
+INFO 2019-05-20 08:52:02,790 basehttp 124 "GET /carts/simple/ HTTP/1.1" 200 46
+INFO 2019-05-20 08:52:04,865 basehttp 124 "GET /info/ HTTP/1.1" 200 6983
+WARNING 2019-05-20 08:52:04,937 base 152 Not Found: /browse_histories/
+WARNING 2019-05-20 08:52:04,938 basehttp 124 "GET /browse_histories/ HTTP/1.1" 404 5587
+WARNING 2019-05-20 08:52:06,612 base 152 Not Found: /info/user_center_site.html
+WARNING 2019-05-20 08:52:06,613 basehttp 124 "GET /info/user_center_site.html HTTP/1.1" 404 5614
+WARNING 2019-05-20 08:52:06,737 base 152 Not Found: /favicon.ico
+WARNING 2019-05-20 08:52:06,739 basehttp 124 "GET /favicon.ico HTTP/1.1" 404 5569
+INFO 2019-05-20 08:52:12,626 basehttp 124 "GET /static/user_center_pass.html HTTP/1.1" 200 4485
+INFO 2019-05-20 08:52:12,647 basehttp 124 "GET /static/js/user_center_pass.js HTTP/1.1" 200 4955
+WARNING 2019-05-20 08:52:12,713 base 152 Not Found: /favicon.ico
+WARNING 2019-05-20 08:52:12,713 basehttp 124 "GET /favicon.ico HTTP/1.1" 404 5569
+WARNING 2019-05-20 08:52:20,463 base 152 Not Found: /templates/user_center_order.html
+WARNING 2019-05-20 08:52:20,464 basehttp 124 "GET /templates/user_center_order.html HTTP/1.1" 404 5632
+WARNING 2019-05-20 08:52:20,529 base 152 Not Found: /favicon.ico
+WARNING 2019-05-20 08:52:20,529 basehttp 124 "GET /favicon.ico HTTP/1.1" 404 5569
+WARNING 2019-05-20 08:52:23,458 base 152 Not Found: /templates/user_center_site.html
+WARNING 2019-05-20 08:52:23,458 basehttp 124 "GET /templates/user_center_site.html HTTP/1.1" 404 5629
+WARNING 2019-05-20 08:52:23,494 base 152 Not Found: /favicon.ico
+WARNING 2019-05-20 08:52:23,495 basehttp 124 "GET /favicon.ico HTTP/1.1" 404 5569
+WARNING 2019-05-20 08:52:29,531 base 152 Not Found: /templates/user_center_site.html
+WARNING 2019-05-20 08:52:29,532 basehttp 124 "GET /templates/user_center_site.html HTTP/1.1" 404 5629
+WARNING 2019-05-20 08:54:26,107 base 152 Not Found: /templates/user_center_site.html
+WARNING 2019-05-20 08:54:26,110 basehttp 124 "GET /templates/user_center_site.html HTTP/1.1" 404 5629
+INFO 2019-05-20 08:54:26,566 basehttp 124 "GET /carts/simple/ HTTP/1.1" 200 46
+INFO 2019-05-20 08:54:26,575 basehttp 124 "GET / HTTP/1.1" 200 25337
+WARNING 2019-05-20 08:54:26,909 base 152 Not Found: /favicon.ico
+WARNING 2019-05-20 08:54:26,910 basehttp 124 "GET /favicon.ico HTTP/1.1" 404 5569
+INFO 2019-05-20 08:54:29,176 basehttp 124 "GET /addresses/ HTTP/1.1" 200 8292
+INFO 2019-05-20 08:54:29,217 basehttp 124 "GET /static/js/user_center_site.js HTTP/1.1" 200 27011
+INFO 2019-05-20 08:54:29,222 basehttp 124 "GET /static/images/edit.png HTTP/1.1" 200 1244
+WARNING 2019-05-20 08:54:29,371 base 152 Not Found: /favicon.ico
+WARNING 2019-05-20 08:54:29,372 basehttp 124 "GET /favicon.ico HTTP/1.1" 404 5569
+INFO 2019-05-20 08:54:29,377 basehttp 124 "GET /areas/ HTTP/1.1" 200 50
+INFO 2019-05-20 09:00:38,026 basehttp 124 "GET / HTTP/1.1" 200 25337
+INFO 2019-05-20 09:00:38,059 basehttp 124 "GET /carts/simple/ HTTP/1.1" 200 46
+INFO 2019-05-20 09:00:54,272 basehttp 124 "GET /info/ HTTP/1.1" 200 6973
+WARNING 2019-05-20 09:00:54,364 base 152 Not Found: /browse_histories/
+WARNING 2019-05-20 09:00:54,366 basehttp 124 "GET /browse_histories/ HTTP/1.1" 404 5587
+INFO 2019-05-20 09:00:55,975 basehttp 124 "GET /addresses/ HTTP/1.1" 200 8292
+INFO 2019-05-20 09:00:56,061 basehttp 124 "GET /areas/ HTTP/1.1" 200 50
+INFO 2019-05-20 09:02:15,695 basehttp 124 "GET /addresses/ HTTP/1.1" 302 0
+INFO 2019-05-20 09:02:15,718 basehttp 124 "GET /login/?next=/addresses/ HTTP/1.1" 200 3837
+WARNING 2019-05-20 09:02:16,713 base 152 Not Found: /favicon.ico
+WARNING 2019-05-20 09:02:16,714 basehttp 124 "GET /favicon.ico HTTP/1.1" 404 5569
+INFO 2019-05-20 09:02:29,392 basehttp 124 "POST /login/?next=/addresses/ HTTP/1.1" 302 0
+INFO 2019-05-20 09:02:29,405 basehttp 124 "GET /addresses/ HTTP/1.1" 200 8292
+INFO 2019-05-20 09:02:29,437 basehttp 124 "GET /static/js/user_center_site.js HTTP/1.1" 200 27011
+INFO 2019-05-20 09:02:29,477 basehttp 124 "GET /static/images/edit.png HTTP/1.1" 200 1244
+INFO 2019-05-20 09:02:29,598 basehttp 124 "GET /areas/ HTTP/1.1" 200 50
+WARNING 2019-05-20 09:02:34,042 basehttp 124 "GET /static/js/axios.min.map HTTP/1.1" 404 1661
+INFO 2019-05-20 09:09:03,903 basehttp 124 "GET / HTTP/1.1" 200 25337
+INFO 2019-05-20 09:09:03,921 basehttp 124 "GET /carts/simple/ HTTP/1.1" 200 46
+INFO 2019-05-20 09:09:05,769 basehttp 124 "GET /info/ HTTP/1.1" 200 6973
+WARNING 2019-05-20 09:09:05,911 base 152 Not Found: /browse_histories/
+WARNING 2019-05-20 09:09:05,920 basehttp 124 "GET /browse_histories/ HTTP/1.1" 404 5587
+WARNING 2019-05-20 09:09:08,095 base 152 Not Found: /info/index.html
+WARNING 2019-05-20 09:09:08,095 basehttp 124 "GET /info/index.html HTTP/1.1" 404 5581
+WARNING 2019-05-20 09:09:20,342 base 152 Not Found: /browse_histories/
+WARNING 2019-05-20 09:09:20,343 basehttp 124 "GET /browse_histories/ HTTP/1.1" 404 5587
+INFO 2019-05-20 09:09:20,354 basehttp 124 "GET /info/ HTTP/1.1" 200 6973
+WARNING 2019-05-20 09:09:20,407 base 152 Not Found: /browse_histories/
+WARNING 2019-05-20 09:09:20,408 basehttp 124 "GET /browse_histories/ HTTP/1.1" 404 5587
+INFO 2019-05-20 09:09:25,723 basehttp 124 "GET /addresses/ HTTP/1.1" 200 8295
+INFO 2019-05-20 09:09:25,815 basehttp 124 "GET /areas/ HTTP/1.1" 200 50
+INFO 2019-05-20 09:29:49,545 basehttp 124 "GET / HTTP/1.1" 200 25337
+INFO 2019-05-20 09:29:49,588 basehttp 124 "GET /carts/simple/ HTTP/1.1" 200 46
+INFO 2019-05-20 09:29:51,547 basehttp 124 "GET /info/ HTTP/1.1" 200 6973
+WARNING 2019-05-20 09:29:51,737 base 152 Not Found: /browse_histories/
+WARNING 2019-05-20 09:29:51,740 basehttp 124 "GET /browse_histories/ HTTP/1.1" 404 5587
+INFO 2019-05-20 09:29:53,316 basehttp 124 "GET /addresses/ HTTP/1.1" 200 8846
+INFO 2019-05-20 09:29:53,395 basehttp 124 "GET /areas/ HTTP/1.1" 200 50
+INFO 2019-05-20 15:23:20,731 basehttp 124 "GET / HTTP/1.1" 200 25337
+INFO 2019-05-20 15:23:20,764 basehttp 124 "GET /carts/simple/ HTTP/1.1" 200 46
+INFO 2019-05-20 15:23:22,796 basehttp 124 "GET /info/ HTTP/1.1" 200 7096
+WARNING 2019-05-20 15:23:22,889 base 152 Not Found: /browse_histories/
+WARNING 2019-05-20 15:23:22,891 basehttp 124 "GET /browse_histories/ HTTP/1.1" 404 6331
+INFO 2019-05-20 15:23:24,941 basehttp 124 "GET /addresses/ HTTP/1.1" 200 9330
+INFO 2019-05-20 15:23:25,086 basehttp 124 "GET /areas/ HTTP/1.1" 200 50
+INFO 2019-05-20 15:24:00,001 basehttp 124 "GET /password/ HTTP/1.1" 200 4665
+WARNING 2019-05-20 15:24:00,132 base 152 Not Found: /favicon.ico
+WARNING 2019-05-20 15:24:00,133 basehttp 124 "GET /favicon.ico HTTP/1.1" 404 6313
+INFO 2019-05-20 15:24:13,844 basehttp 124 "POST /password/ HTTP/1.1" 302 0
+INFO 2019-05-20 15:24:13,863 basehttp 124 "GET /login/ HTTP/1.1" 200 3837
+INFO 2019-05-20 15:24:21,171 basehttp 124 "POST /login/ HTTP/1.1" 302 0
+INFO 2019-05-20 15:24:21,182 basehttp 124 "GET / HTTP/1.1" 200 25337
+INFO 2019-05-20 15:24:21,329 basehttp 124 "GET /carts/simple/ HTTP/1.1" 200 46
+WARNING 2019-05-20 15:24:23,217 base 152 Not Found: /browse_histories/
+WARNING 2019-05-20 15:24:23,220 basehttp 124 "GET /browse_histories/ HTTP/1.1" 404 6331
+INFO 2019-05-20 15:24:23,229 basehttp 124 "GET /info/ HTTP/1.1" 200 7096
+INFO 2019-05-20 15:24:24,791 basehttp 124 "GET /password/ HTTP/1.1" 200 4665
+INFO 2019-05-20 15:24:32,963 basehttp 124 "POST /password/ HTTP/1.1" 302 0
+INFO 2019-05-20 15:24:32,972 basehttp 124 "GET /login/ HTTP/1.1" 200 3837
+INFO 2019-05-20 15:24:38,833 basehttp 124 "POST /login/ HTTP/1.1" 302 0
+INFO 2019-05-20 15:24:38,843 basehttp 124 "GET / HTTP/1.1" 200 25337
+INFO 2019-05-20 15:24:38,979 basehttp 124 "GET /carts/simple/ HTTP/1.1" 200 46
+INFO 2019-05-20 15:24:39,755 basehttp 124 "GET /carts/simple/ HTTP/1.1" 200 46
+WARNING 2019-05-20 15:24:40,311 base 152 Not Found: /browse_histories/
+WARNING 2019-05-20 15:24:40,313 basehttp 124 "GET /browse_histories/ HTTP/1.1" 404 6331
+INFO 2019-05-20 15:24:40,321 basehttp 124 "GET /info/ HTTP/1.1" 200 7096
+WARNING 2019-05-20 15:24:41,866 basehttp 124 "GET /static/user_center_order.html HTTP/1.1" 404 1679
+WARNING 2019-05-20 15:24:41,932 base 152 Not Found: /favicon.ico
+WARNING 2019-05-20 15:24:41,933 basehttp 124 "GET /favicon.ico HTTP/1.1" 404 6313
+INFO 2019-05-20 15:24:45,945 basehttp 124 "GET /areas/ HTTP/1.1" 200 50
+INFO 2019-05-20 15:24:45,953 basehttp 124 "GET /addresses/ HTTP/1.1" 200 9330
+WARNING 2019-05-20 15:24:48,949 base 152 Not Found: /browse_histories/
+WARNING 2019-05-20 15:24:48,951 basehttp 124 "GET /browse_histories/ HTTP/1.1" 404 6331
+INFO 2019-05-20 15:24:48,964 basehttp 124 "GET /info/ HTTP/1.1" 200 7096
+INFO 2019-05-20 15:24:49,962 basehttp 124 "GET /password/ HTTP/1.1" 200 4665
+WARNING 2019-05-20 15:24:50,953 base 152 Not Found: /browse_histories/
+WARNING 2019-05-20 15:24:50,955 basehttp 124 "GET /browse_histories/ HTTP/1.1" 404 6331
+INFO 2019-05-20 15:24:50,963 basehttp 124 "GET /info/ HTTP/1.1" 200 7096
+WARNING 2019-05-20 15:24:51,499 basehttp 124 "GET /static/user_center_order.html HTTP/1.1" 404 1679
+ERROR 2019-05-20 15:24:57,643 exception 135 Internal Server Error: /carts/
+Traceback (most recent call last):
+  File "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/虚拟环境/lib/python3.6/site-packages/django/core/handlers/exception.py", line 41, in inner
+    response = get_response(request)
+  File "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/虚拟环境/lib/python3.6/site-packages/django/core/handlers/base.py", line 198, in _get_response
+    "returned None instead." % (callback.__module__, view_name)
+ValueError: The view carts.views.CartsView didn't return an HttpResponse object. It returned None instead.
+ERROR 2019-05-20 15:24:57,712 basehttp 124 "GET /carts/ HTTP/1.1" 500 59729
+WARNING 2019-05-20 15:25:13,046 base 152 Not Found: /search/
+WARNING 2019-05-20 15:25:13,046 basehttp 124 "GET /search/?q=1 HTTP/1.1" 404 6305
+WARNING 2019-05-20 15:25:13,079 base 152 Not Found: /favicon.ico
+WARNING 2019-05-20 15:25:13,080 basehttp 124 "GET /favicon.ico HTTP/1.1" 404 6313
+WARNING 2019-05-20 15:25:16,121 base 152 Not Found: /favicon.ico
+WARNING 2019-05-20 15:25:16,121 basehttp 124 "GET /favicon.ico HTTP/1.1" 404 6313
+WARNING 2019-05-20 15:25:22,527 base 152 Not Found: /info/user_center_order.html
+WARNING 2019-05-20 15:25:22,528 basehttp 124 "GET /info/user_center_order.html HTTP/1.1" 404 6361
+WARNING 2019-05-20 15:25:22,559 base 152 Not Found: /favicon.ico
+WARNING 2019-05-20 15:25:22,564 basehttp 124 "GET /favicon.ico HTTP/1.1" 404 6313
+INFO 2019-05-21 00:23:15,583 basehttp 124 "GET /carts/simple/ HTTP/1.1" 200 46
+INFO 2019-05-21 00:23:15,629 basehttp 124 "GET / HTTP/1.1" 200 25337
+ERROR 2019-05-21 00:23:19,542 exception 135 Internal Server Error: /carts/
+Traceback (most recent call last):
+  File "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/虚拟环境/lib/python3.6/site-packages/django/core/handlers/exception.py", line 41, in inner
+    response = get_response(request)
+  File "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/虚拟环境/lib/python3.6/site-packages/django/core/handlers/base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/虚拟环境/lib/python3.6/site-packages/django/core/handlers/base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/虚拟环境/lib/python3.6/site-packages/django/views/generic/base.py", line 68, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/虚拟环境/lib/python3.6/site-packages/django/views/generic/base.py", line 88, in dispatch
+    return handler(request, *args, **kwargs)
+  File "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/meiduo_mall/apps/carts/views.py", line 68, in get
+    return render(request, 'cart.html', context)
+  File "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/虚拟环境/lib/python3.6/site-packages/django/shortcuts.py", line 30, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/虚拟环境/lib/python3.6/site-packages/django/template/loader.py", line 68, in render_to_string
+    return template.render(context, request)
+  File "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/虚拟环境/lib/python3.6/site-packages/django/template/backends/jinja2.py", line 81, in render
+    return self.template.render(context)
+  File "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/虚拟环境/lib/python3.6/site-packages/jinja2/asyncsupport.py", line 76, in render
+    return original_render(self, *args, **kwargs)
+  File "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/虚拟环境/lib/python3.6/site-packages/jinja2/environment.py", line 1008, in render
+    return self.environment.handle_exception(exc_info, True)
+  File "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/虚拟环境/lib/python3.6/site-packages/jinja2/environment.py", line 780, in handle_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/虚拟环境/lib/python3.6/site-packages/jinja2/_compat.py", line 37, in reraise
+    raise value.with_traceback(tb)
+  File "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/meiduo_mall/templates/cart.html", line 92, in top-level template code
+    <a href="{{ url('orders:settlement') }}">去结算</a>
+  File "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/虚拟环境/lib/python3.6/site-packages/django/urls/base.py", line 91, in reverse
+    return force_text(iri_to_uri(resolver._reverse_with_prefix(view, prefix, *args, **kwargs)))
+  File "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/虚拟环境/lib/python3.6/site-packages/django/urls/resolvers.py", line 497, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'settlement' not found. 'settlement' is not a valid view function or pattern name.
+ERROR 2019-05-21 00:23:19,675 basehttp 124 "GET /carts/ HTTP/1.1" 500 137075
+INFO 2019-05-21 00:23:33,176 basehttp 124 "GET /info/ HTTP/1.1" 302 0
+INFO 2019-05-21 00:23:33,199 basehttp 124 "GET /login/?next=/info/ HTTP/1.1" 200 3837
+WARNING 2019-05-21 00:23:36,793 base 152 Not Found: /user_center_order.html
+WARNING 2019-05-21 00:23:36,793 basehttp 124 "GET /user_center_order.html HTTP/1.1" 404 6346
+WARNING 2019-05-21 00:23:36,905 base 152 Not Found: /favicon.ico
+WARNING 2019-05-21 00:23:36,906 basehttp 124 "GET /favicon.ico HTTP/1.1" 404 6313
+INFO 2019-05-21 00:23:41,247 basehttp 124 "GET /logout/ HTTP/1.1" 302 0
+INFO 2019-05-21 00:23:41,256 basehttp 124 "GET / HTTP/1.1" 200 25337
+INFO 2019-05-21 00:23:41,375 basehttp 124 "GET /carts/simple/ HTTP/1.1" 200 46
+INFO 2019-05-21 00:23:44,741 basehttp 124 "GET /carts/simple/ HTTP/1.1" 200 46
+ERROR 2019-05-21 00:23:45,891 exception 135 Internal Server Error: /carts/
+Traceback (most recent call last):
+  File "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/虚拟环境/lib/python3.6/site-packages/django/core/handlers/exception.py", line 41, in inner
+    response = get_response(request)
+  File "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/虚拟环境/lib/python3.6/site-packages/django/core/handlers/base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/虚拟环境/lib/python3.6/site-packages/django/core/handlers/base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/虚拟环境/lib/python3.6/site-packages/django/views/generic/base.py", line 68, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/虚拟环境/lib/python3.6/site-packages/django/views/generic/base.py", line 88, in dispatch
+    return handler(request, *args, **kwargs)
+  File "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/meiduo_mall/apps/carts/views.py", line 68, in get
+    return render(request, 'cart.html', context)
+  File "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/虚拟环境/lib/python3.6/site-packages/django/shortcuts.py", line 30, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/虚拟环境/lib/python3.6/site-packages/django/template/loader.py", line 68, in render_to_string
+    return template.render(context, request)
+  File "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/虚拟环境/lib/python3.6/site-packages/django/template/backends/jinja2.py", line 81, in render
+    return self.template.render(context)
+  File "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/虚拟环境/lib/python3.6/site-packages/jinja2/asyncsupport.py", line 76, in render
+    return original_render(self, *args, **kwargs)
+  File "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/虚拟环境/lib/python3.6/site-packages/jinja2/environment.py", line 1008, in render
+    return self.environment.handle_exception(exc_info, True)
+  File "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/虚拟环境/lib/python3.6/site-packages/jinja2/environment.py", line 780, in handle_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/虚拟环境/lib/python3.6/site-packages/jinja2/_compat.py", line 37, in reraise
+    raise value.with_traceback(tb)
+  File "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/meiduo_mall/templates/cart.html", line 92, in top-level template code
+    <a href="{{ url('orders:settlement') }}">去结算</a>
+  File "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/虚拟环境/lib/python3.6/site-packages/django/urls/base.py", line 91, in reverse
+    return force_text(iri_to_uri(resolver._reverse_with_prefix(view, prefix, *args, **kwargs)))
+  File "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/虚拟环境/lib/python3.6/site-packages/django/urls/resolvers.py", line 497, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'settlement' not found. 'settlement' is not a valid view function or pattern name.
+ERROR 2019-05-21 00:23:46,031 basehttp 124 "GET /carts/ HTTP/1.1" 500 136908
+WARNING 2019-05-21 00:23:54,284 base 152 Not Found: /user_center_order.html
+WARNING 2019-05-21 00:23:54,286 basehttp 124 "GET /user_center_order.html HTTP/1.1" 404 6346
+ERROR 2019-05-21 00:26:39,601 exception 135 Internal Server Error: /carts/
+Traceback (most recent call last):
+  File "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/虚拟环境/lib/python3.6/site-packages/django/core/handlers/exception.py", line 41, in inner
+    response = get_response(request)
+  File "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/虚拟环境/lib/python3.6/site-packages/django/core/handlers/base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/虚拟环境/lib/python3.6/site-packages/django/core/handlers/base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/虚拟环境/lib/python3.6/site-packages/django/views/generic/base.py", line 68, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/虚拟环境/lib/python3.6/site-packages/django/views/generic/base.py", line 88, in dispatch
+    return handler(request, *args, **kwargs)
+  File "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/meiduo_mall/apps/carts/views.py", line 68, in get
+    return render(request, 'cart.html', context)
+  File "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/虚拟环境/lib/python3.6/site-packages/django/shortcuts.py", line 30, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/虚拟环境/lib/python3.6/site-packages/django/template/loader.py", line 68, in render_to_string
+    return template.render(context, request)
+  File "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/虚拟环境/lib/python3.6/site-packages/django/template/backends/jinja2.py", line 81, in render
+    return self.template.render(context)
+  File "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/虚拟环境/lib/python3.6/site-packages/jinja2/asyncsupport.py", line 76, in render
+    return original_render(self, *args, **kwargs)
+  File "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/虚拟环境/lib/python3.6/site-packages/jinja2/environment.py", line 1008, in render
+    return self.environment.handle_exception(exc_info, True)
+  File "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/虚拟环境/lib/python3.6/site-packages/jinja2/environment.py", line 780, in handle_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/虚拟环境/lib/python3.6/site-packages/jinja2/_compat.py", line 37, in reraise
+    raise value.with_traceback(tb)
+  File "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/meiduo_mall/templates/cart.html", line 92, in top-level template code
+    <a href="{{ url('orders:settlement') }}">去结算</a>
+  File "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/虚拟环境/lib/python3.6/site-packages/django/urls/base.py", line 91, in reverse
+    return force_text(iri_to_uri(resolver._reverse_with_prefix(view, prefix, *args, **kwargs)))
+  File "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/虚拟环境/lib/python3.6/site-packages/django/urls/resolvers.py", line 497, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'settlement' not found. 'settlement' is not a valid view function or pattern name.
+ERROR 2019-05-21 00:26:39,969 basehttp 124 "GET /carts/ HTTP/1.1" 500 136908
+INFO 2019-05-21 00:28:41,985 basehttp 124 "GET /carts/simple/ HTTP/1.1" 200 46
+INFO 2019-05-21 00:28:42,032 basehttp 124 "GET / HTTP/1.1" 200 25337
+INFO 2019-05-21 00:28:42,961 basehttp 124 "GET /carts/simple/ HTTP/1.1" 200 46
+INFO 2019-05-21 00:28:46,958 basehttp 124 "GET /login/ HTTP/1.1" 200 3837
+INFO 2019-05-21 00:28:51,464 basehttp 124 "POST /login/ HTTP/1.1" 302 0
+INFO 2019-05-21 00:28:51,477 basehttp 124 "GET / HTTP/1.1" 200 25337
+INFO 2019-05-21 00:28:51,620 basehttp 124 "GET /carts/simple/ HTTP/1.1" 200 46
+ERROR 2019-05-21 00:28:53,744 exception 135 Internal Server Error: /carts/
+Traceback (most recent call last):
+  File "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/虚拟环境/lib/python3.6/site-packages/django/core/handlers/exception.py", line 41, in inner
+    response = get_response(request)
+  File "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/虚拟环境/lib/python3.6/site-packages/django/core/handlers/base.py", line 198, in _get_response
+    "returned None instead." % (callback.__module__, view_name)
+ValueError: The view carts.views.CartsView didn't return an HttpResponse object. It returned None instead.
+ERROR 2019-05-21 00:28:53,802 basehttp 124 "GET /carts/ HTTP/1.1" 500 60472
+INFO 2019-05-21 00:32:18,188 basehttp 124 "GET / HTTP/1.1" 200 25337
+INFO 2019-05-21 00:32:18,210 basehttp 124 "GET /carts/simple/ HTTP/1.1" 200 46
+ERROR 2019-05-21 00:32:25,891 exception 135 Internal Server Error: /carts/
+Traceback (most recent call last):
+  File "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/虚拟环境/lib/python3.6/site-packages/django/core/handlers/exception.py", line 41, in inner
+    response = get_response(request)
+  File "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/虚拟环境/lib/python3.6/site-packages/django/core/handlers/base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/虚拟环境/lib/python3.6/site-packages/django/core/handlers/base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/虚拟环境/lib/python3.6/site-packages/django/views/generic/base.py", line 68, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/虚拟环境/lib/python3.6/site-packages/django/views/generic/base.py", line 88, in dispatch
+    return handler(request, *args, **kwargs)
+  File "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/meiduo_mall/apps/carts/views.py", line 22, in get
+    return render(request, 'cart.html')
+  File "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/虚拟环境/lib/python3.6/site-packages/django/shortcuts.py", line 30, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/虚拟环境/lib/python3.6/site-packages/django/template/loader.py", line 68, in render_to_string
+    return template.render(context, request)
+  File "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/虚拟环境/lib/python3.6/site-packages/django/template/backends/jinja2.py", line 81, in render
+    return self.template.render(context)
+  File "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/虚拟环境/lib/python3.6/site-packages/jinja2/asyncsupport.py", line 76, in render
+    return original_render(self, *args, **kwargs)
+  File "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/虚拟环境/lib/python3.6/site-packages/jinja2/environment.py", line 1008, in render
+    return self.environment.handle_exception(exc_info, True)
+  File "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/虚拟环境/lib/python3.6/site-packages/jinja2/environment.py", line 780, in handle_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/虚拟环境/lib/python3.6/site-packages/jinja2/_compat.py", line 37, in reraise
+    raise value.with_traceback(tb)
+  File "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/meiduo_mall/templates/cart.html", line 92, in top-level template code
+    <a href="{{ url('orders:settlement') }}">去结算</a>
+  File "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/虚拟环境/lib/python3.6/site-packages/django/urls/base.py", line 91, in reverse
+    return force_text(iri_to_uri(resolver._reverse_with_prefix(view, prefix, *args, **kwargs)))
+  File "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/虚拟环境/lib/python3.6/site-packages/django/urls/resolvers.py", line 497, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'settlement' not found. 'settlement' is not a valid view function or pattern name.
+ERROR 2019-05-21 00:32:26,022 basehttp 124 "GET /carts/ HTTP/1.1" 500 132894
+INFO 2019-05-21 00:33:23,595 basehttp 124 "GET / HTTP/1.1" 200 25337
+INFO 2019-05-21 00:33:23,624 basehttp 124 "GET /carts/simple/ HTTP/1.1" 200 46
+INFO 2019-05-21 00:33:24,543 basehttp 124 "GET /carts/simple/ HTTP/1.1" 200 46
+INFO 2019-05-21 00:33:25,528 basehttp 124 "GET /info/ HTTP/1.1" 200 7096
+WARNING 2019-05-21 00:33:25,607 base 152 Not Found: /browse_histories/
+WARNING 2019-05-21 00:33:25,609 basehttp 124 "GET /browse_histories/ HTTP/1.1" 404 6331
+INFO 2019-05-21 00:36:23,834 basehttp 124 "GET / HTTP/1.1" 200 25337
+INFO 2019-05-21 00:36:23,885 basehttp 124 "GET /carts/simple/ HTTP/1.1" 200 46
+INFO 2019-05-21 00:36:28,894 basehttp 124 "GET /info/ HTTP/1.1" 200 7078
+WARNING 2019-05-21 00:36:28,972 base 152 Not Found: /browse_histories/
+WARNING 2019-05-21 00:36:28,972 basehttp 124 "GET /browse_histories/ HTTP/1.1" 404 6331
+INFO 2019-05-21 00:36:30,083 basehttp 124 "GET / HTTP/1.1" 200 25337
+INFO 2019-05-21 00:36:30,109 basehttp 124 "GET /carts/simple/ HTTP/1.1" 200 46
+WARNING 2019-05-21 00:36:31,873 base 152 Not Found: /browse_histories/
+WARNING 2019-05-21 00:36:31,877 basehttp 124 "GET /browse_histories/ HTTP/1.1" 404 6331
+INFO 2019-05-21 00:36:31,885 basehttp 124 "GET /info/ HTTP/1.1" 200 7078
+INFO 2019-05-21 00:36:36,818 basehttp 124 "GET /addresses/ HTTP/1.1" 200 9330
+INFO 2019-05-21 00:36:36,927 basehttp 124 "GET /areas/ HTTP/1.1" 200 50
+WARNING 2019-05-21 00:36:38,920 base 152 Not Found: /addresses/user_center_info.html
+WARNING 2019-05-21 00:36:38,921 basehttp 124 "GET /addresses/user_center_info.html HTTP/1.1" 404 6373
+WARNING 2019-05-21 00:36:38,986 base 152 Not Found: /favicon.ico
+WARNING 2019-05-21 00:36:38,987 basehttp 124 "GET /favicon.ico HTTP/1.1" 404 6313
+INFO 2019-05-21 00:36:45,259 basehttp 124 "GET /areas/ HTTP/1.1" 200 50
+INFO 2019-05-21 00:36:45,266 basehttp 124 "GET /addresses/ HTTP/1.1" 200 9330
+WARNING 2019-05-21 00:36:47,848 base 152 Not Found: /addresses/user_center_info.html
+WARNING 2019-05-21 00:36:47,849 basehttp 124 "GET /addresses/user_center_info.html HTTP/1.1" 404 6373
+WARNING 2019-05-21 00:36:52,065 base 152 Not Found: /browse_histories/
+WARNING 2019-05-21 00:36:52,066 basehttp 124 "GET /browse_histories/ HTTP/1.1" 404 6331
+INFO 2019-05-21 00:36:52,075 basehttp 124 "GET /info/ HTTP/1.1" 200 7078
+WARNING 2019-05-21 00:36:52,888 basehttp 124 "GET /static/user_center_order.html HTTP/1.1" 404 1679
+INFO 2019-05-21 00:36:55,082 basehttp 124 "GET /areas/ HTTP/1.1" 200 50
+INFO 2019-05-21 00:36:55,090 basehttp 124 "GET /addresses/ HTTP/1.1" 200 9330
+WARNING 2019-05-21 00:36:56,239 base 152 Not Found: /browse_histories/
+WARNING 2019-05-21 00:36:56,241 basehttp 124 "GET /browse_histories/ HTTP/1.1" 404 6331
+INFO 2019-05-21 00:36:56,249 basehttp 124 "GET /info/ HTTP/1.1" 200 7078
+INFO 2019-05-21 00:36:57,264 basehttp 124 "GET /areas/ HTTP/1.1" 200 50
+INFO 2019-05-21 00:36:57,271 basehttp 124 "GET /addresses/ HTTP/1.1" 200 9330
+WARNING 2019-05-21 00:37:06,230 base 152 Not Found: /addresses/index.html
+WARNING 2019-05-21 00:37:06,234 basehttp 124 "GET /addresses/index.html HTTP/1.1" 404 6340
+WARNING 2019-05-21 00:37:06,269 base 152 Not Found: /favicon.ico
+WARNING 2019-05-21 00:37:06,269 basehttp 124 "GET /favicon.ico HTTP/1.1" 404 6313
+INFO 2019-05-21 00:41:55,440 basehttp 124 "GET / HTTP/1.1" 200 25337
+INFO 2019-05-21 00:41:55,477 basehttp 124 "GET /carts/simple/ HTTP/1.1" 200 46
+INFO 2019-05-21 00:41:57,979 basehttp 124 "GET /info/ HTTP/1.1" 200 7078
+WARNING 2019-05-21 00:41:58,080 base 152 Not Found: /browse_histories/
+WARNING 2019-05-21 00:41:58,083 basehttp 124 "GET /browse_histories/ HTTP/1.1" 404 6331
+INFO 2019-05-21 00:42:00,899 basehttp 124 "GET /areas/ HTTP/1.1" 200 50
+INFO 2019-05-21 00:42:00,918 basehttp 124 "GET /addresses/ HTTP/1.1" 200 9645
+WARNING 2019-05-21 00:42:02,912 base 152 Not Found: /browse_histories/
+WARNING 2019-05-21 00:42:02,915 basehttp 124 "GET /browse_histories/ HTTP/1.1" 404 6331
+INFO 2019-05-21 00:42:02,922 basehttp 124 "GET /info/ HTTP/1.1" 200 7078
+INFO 2019-05-21 00:42:04,516 basehttp 124 "GET /areas/ HTTP/1.1" 200 50
+INFO 2019-05-21 00:42:04,524 basehttp 124 "GET /addresses/ HTTP/1.1" 200 9645
+WARNING 2019-05-21 00:42:05,719 base 152 Not Found: /addresses/index.html
+WARNING 2019-05-21 00:42:05,720 basehttp 124 "GET /addresses/index.html HTTP/1.1" 404 6340
+WARNING 2019-05-21 00:42:18,664 basehttp 124 "GET /static/user_center_order.html HTTP/1.1" 404 1679
+WARNING 2019-05-21 00:42:21,392 base 152 Not Found: /addresses/index.html
+WARNING 2019-05-21 00:42:21,392 basehttp 124 "GET /addresses/index.html HTTP/1.1" 404 6340

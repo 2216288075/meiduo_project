@@ -3,11 +3,11 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 	<title>美多商城-商品详情</title>
-	<link rel="stylesheet" type="text/css" href="css/reset.css">
-	<link rel="stylesheet" type="text/css" href="css/main.css">
-    <script type="text/javascript" src="js/host.js"></script>
-	<script type="text/javascript" src="js/vue-2.5.16.js"></script>
-    <script type="text/javascript" src="js/axios-0.18.0.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="../static/css/reset.css">
+	<link rel="stylesheet" type="text/css" href="../static/css/main.css">
+    <script type="text/javascript" src="../static/js/host.js"></script>
+	<script type="text/javascript" src="../static/js/vue-2.5.16.js"></script>
+    <script type="text/javascript" src="../static/js/axios-0.18.0.min.js"></script>
 </head>
 <body>
 	<div id="app" v-cloak>
@@ -15,28 +15,30 @@
 		<div class="header">
 			<div class="welcome fl">欢迎来到美多商城!</div>
 			<div class="fr">
-				<div class="login_info fl">
-					欢迎您：<em>张 山</em>
-				</div>
-				<div class="login_btn fl">
-					<a href="../templates/login.html">登录</a>
-					<span>|</span>
-					<a href="../templates/register.html">注册</a>
-				</div>
-				<div class="user_link fl">
-					<span>|</span>
-					<a href="../templates/user_center_info.html">用户中心</a>
-					<span>|</span>
-					<a href="cart.html">我的购物车</a>
-					<span>|</span>
-					<a href="user_center_order.html">我的订单</a>
-				</div>
+                <div v-if="username" class="login_btn fl">
+                     欢迎您：<em>[[ username ]]</em>
+                    <span>|</span>
+                     <a href="{{ url('users:logout') }}">退出</a>
+                </div>
+                <div v-else class="login_btn fl">
+                    <a href="{{ url('users:login') }}">登录</a>
+                    <span>|</span>
+                    <a href="{{ url('users:register') }}">注册</a>
+                </div>
+                <div class="user_link fl">
+                    <span>|</span>
+                    <a href="{{ url('users:info') }}">用户中心</a>
+                    <span>|</span>
+                    <a href="{{ url('carts:info') }}">我的购物车</a>
+                    <span>|</span>
+                    <a href="user_center_order.html">我的订单</a>
+                </div>
 			</div>
 		</div>		
 	</div>
 
 	<div class="search_bar clearfix">
-		<a href="../templates/index.html" class="logo fl"><img src="{{ static('images/logo02.png') }}"></a>
+		<a href="index.html" class="logo fl"><img src="{{ static('images/logo02.png') }}"></a>
 		<div class="search_wrap fl">
 			<form method="get" action="/search/" class="search_con">
                 <input type="text" class="input_text fl" name="q" placeholder="搜索商品">
@@ -50,22 +52,18 @@
 			</ul>
 		</div>
 
-		<div class="guest_cart fr">
-			<a href="cart.html" class="cart_name fl">我的购物车</a>
-			<div class="goods_count fl" id="show_count">2</div>
-			<ul class="cart_goods_show">
-				<li>
-					<img src="images/goods/goods001.jpg" alt="商品图片">
-					<h4>华为 HUAWEI P10 Plus 6GB+64GB 钻雕金 移动联通电信4G手机 双卡双待</h4>
-					<div>1</div>
-				</li>
-				<li>
-					<img src="images/goods/goods002.jpg" alt="商品图片">
-					<h4>Apple iPhoneX 64GB 深空灰色 移动联通电信4G手机</h4>
-					<div>1</div>
-				</li>
-			</ul>			
-		</div>
+        <div @mouseenter="get_carts" class="guest_cart fr" v-cloak>
+            <a href="{{ url('carts:info') }}" class="cart_name fl">我的购物车</a>
+            <div class="goods_count fl" id="show_count">[[ cart_total_count ]]</div>
+            <ul class="cart_goods_show">
+                <li v-for="sku in carts">
+                    <img :src="sku.default_image_url" alt="商品图片">
+                    <h4>[[ sku.name ]]</h4>
+                    <div>[[ sku.count ]]</div>
+                </li>
+            </ul>
+        </div>
+
 	</div>
 
 	<div class="navbar_con">
@@ -270,7 +268,7 @@
 	</div>
 
 	<div class="goods_detail_con clearfix">
-		<div class="goods_detail_pic fl"><img src="images/goods_450.jpg"></div>
+		<div class="goods_detail_pic fl"><img src="../static/images/goods_450.jpg"></div>
 		<div class="goods_detail_list fr">
 			<h3>Apple MacBook Pro 13.3英寸笔记本 银色</h3>
 			<p>【全新2017款】MacBook Pro,一身才华，一触，即发 了解【黑五返场特惠】 更多产品请点击【美多官方Apple旗舰店】</p>
@@ -303,9 +301,9 @@
 				<a href="javascript:;">core i5/8G内存/512G存储/Multi-Touch Bar</a>
 			</div>
 			<div class="total">总价：<em>11388.00元</em></div>
-			<div class="operate_btn">
-				<a href="javascript:;" class="add_cart" id="add_cart">加入购物车</a>				
-			</div>
+            <div class="operate_btn">
+                <a @click="add_cart" class="add_cart" id="add_cart">加入购物车</a>
+            </div>
 		</div>
 	</div>
 
@@ -351,7 +349,7 @@
 				<ul class="judge_list_con">
 					<li class="judge_list fl">
 						<div class="user_info fl">
-							<img src="images/cat.jpg">
+							<img src="../static/images/cat.jpg">
 							<b>潇***啼</b>
 						</div>
 						<div class="judge_info fl">
@@ -391,7 +389,7 @@
         var category_id = "";
         var sku_id = "";
     </script>
-	<script type="text/javascript" src="js/common.js"></script>
-	<script type="text/javascript" src="js/detail.js"></script>
+	<script type="text/javascript" src="../static/js/common.js"></script>
+	<script type="text/javascript" src="../static/js/detail.js"></script>
 </body>
 </html>

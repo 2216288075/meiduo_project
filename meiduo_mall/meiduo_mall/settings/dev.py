@@ -39,8 +39,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'users',
+    'contents',
     'oauth',
-    # 'corsheaders',
+    'goods',
+    'carts',
+    'orders',
+    'areas',
+    'corsheaders',
 ]
 
 from corsheaders.middleware import CorsMiddleware
@@ -49,7 +54,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
 
-    # 'corsheaders.middleware.CorsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
 
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -160,6 +165,13 @@ CACHES = {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
         }
     },
+    "carts": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://127.0.0.1:6379/4",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        }
+    },
 }
 SESSION_ENGINE = "django.contrib.sessions.backends.cache"
 SESSION_CACHE_ALIAS = "session"
@@ -256,23 +268,23 @@ EMAIL_FROM = '嘿嘿嘿<17687949560@163.com>'
 # 邮箱验证链接
 EMAIL_VERIFY_URL = 'http://www.meiduo.site:8000/emails/verification/'
 
-# # 添加 django-cors-headers 的白名单, 使白名单中的 host 可以进行跨域请求
-# CORS_ORIGIN_WHITELIST = (
-#     # 白名单:
-#     '127.0.0.1:8080',
-#     'localhost:8080',
-#
-#     '127.0.0.1:8081',
-#     'localhost:8081',
-#
-#     'localhost:8000',
-#     '127.0.0.1:8000',
-#
-#     'www.meiduo.site:8080',
-#     'www.meiduo.site:8000',
-#     'www.meiduo.site',
-#
-#     '172.128.16.238:8001',
-# )
-# # 允许白名单中的 host 跨域请求时携带 cookie
-# CORS_ALLOW_CREDENTIALS = True
+# 添加 django-cors-headers 的白名单, 使白名单中的 host 可以进行跨域请求
+CORS_ORIGIN_WHITELIST = (
+    # 白名单:
+    'http://127.0.0.1:8080',
+    'http://localhost:8080',
+
+    'http://127.0.0.1:8081',
+    'http://localhost:8081',
+
+    'http://localhost:8000',
+    'http://127.0.0.1:8000',
+
+    'http://www.meiduo.site:8080',
+    'http://www.meiduo.site:8000',
+    'http://www.meiduo.site',
+
+    'http://172.128.16.238:8001',
+)
+# 允许白名单中的 host 跨域请求时携带 cookie
+CORS_ALLOW_CREDENTIALS = True
