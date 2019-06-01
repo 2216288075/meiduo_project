@@ -1,4 +1,3 @@
-# 导入:
 from django.core.mail import send_mail
 from django.conf import settings
 import logging
@@ -21,10 +20,12 @@ def send_verify_email(self, to_email, verify_url):
                    '<p>感谢您使用美多商城。</p>' \
                    '<p>您的邮箱为：%s 。请点击此链接激活您的邮箱：</p>' \
                    '<p><a href="%s">%s<a></p>' % (to_email, verify_url, verify_url)
+
     try:
-    # 进行发送
-        send_mail(subject, "", settings.EMAIL_FROM, [to_email], html_message=html_message)
+    #进行发送
+        send_mail(subject,'',settings.EMAIL_FROM,[to_email], html_message=html_message)
     except Exception as e:
-        logger.error(e)
+        logging.error(e)
         # 有异常自动重试三次
         raise self.retry(exc=e, max_retries=3)
+

@@ -1,26 +1,27 @@
+import re
+
 from django import http
 from django.contrib.auth import login
-from django.db import DatabaseError
 from django.shortcuts import render, redirect
+import logging
 
-# Create your views here.
+from django.urls import reverse
+from django_redis import get_redis_connection
+from pymysql import DatabaseError
 
-# 导入:
+from carts.utils import merge_cart_cookie_to_redis
+from meiduo_mall.apps.oauth.utils import check_access_token
+from users.models import User
+from .models import OAuthQQUser
+from meiduo_mall.utils.itsdangerous_ import generate_access_token
+
+logger = logging.getLogger('django')
+
 from QQLoginTool.QQtool import OAuthQQ
 from django.conf import settings
-from django.urls import reverse
 from django.views import View
-from django_redis import get_redis_connection
 
-from meiduo_mall.apps.oauth.utils import generate_access_token, check_access_token
-
-from users.models import User
-
-from .models import OAuthQQUser
-from meiduo_mall.settings.dev import logger
 from meiduo_mall.utils.response_code import RETCODE
-
-import re
 
 
 class QQURLView(View):
@@ -32,9 +33,9 @@ class QQURLView(View):
     state=xxx
     """
 
-    def get(self, request):
-        # next 表示从哪个页面进入到的登录页面，将来登录成功后，就自动回到那个页面
-        next = request.GET.get('next')
+    def get(self,request):
+    # next 表示从哪个页面进入到的登录页面，将来登录成功后，就自动回到那个页面
+        next = request.GET.get('enxt')
 
         # 获取 QQ 登录页面网址
         # 创建 OAuthQQ 类的对象
@@ -46,9 +47,8 @@ class QQURLView(View):
         # 调用对象的获取 qq 地址方法
         login_url = oauth.get_qq_url()
 
-        # 返回登录地址
+        # 返回登陆地址
         return http.JsonResponse({'code': RETCODE.OK, 'errmsg': 'OK', 'login_url':login_url})
-
 
 
 
@@ -56,8 +56,8 @@ class QQUserView(View):
     """用户扫码登录的回调处理"""
 
     def get(self, request):
-        """Oauth2.0 认证"""
-        # 提取code请求参数
+        """Oauth2.0认证"""
+        # 接收Authorization Code
         code = request.GET.get('code')
         if not code:
             return http.HttpResponseForbidden('缺少code')
@@ -81,7 +81,6 @@ class QQUserView(View):
             return http.HttpResponseServerError('OAuth2.0认证失败')
 
         try:
-            # 查看是否有 openid 对应的用户
             oauth_user = OAuthQQUser.objects.get(openid=openid)
 
         except OAuthQQUser.DoesNotExist:
@@ -91,7 +90,8 @@ class QQUserView(View):
             # 拿到 access_token 字符串后, 拼接字典
             context = {'access_token': access_token}
             # 返回响应, 重新渲染
-            return render(request, 'oauth_callback.html', context)
+            return render(request,'oauth_callback.html', context)
+
         else:
             # 如果 openid 已绑定美多商城用户
             # 根据 user 外键, 获取对应的 QQ用户
@@ -103,20 +103,32 @@ class QQUserView(View):
             response = redirect(reverse('contents:index'))
 
             # 将用户信息写入到 cookie 中，有效期15天
-            response.set_cookie('username', qq_user.username, max_age=3600 * 24 * 15)
+            response.set_cookie('username',qq_user.username,max_age=3600 * 24 * 15)
+
+            # 合并购物车
+            response = merge_cart_cookie_to_redis(request=request, user=qq_user, response=response)
 
             # 返回响应
             return response
 
 
+
     def post(self, request):
         """美多商城用户绑定到openid"""
+        """
+        参数	            类型	是否必须	说明
+        mobile	        str	是	    手机号
+        password	    str	是	    密码
+        sms_code	    str	是	    短信验证码
+        access_token	str	是	    凭据 （包含 openid )
+        """
 
         # 1.接收参数
         mobile = request.POST.get('mobile')
         password = request.POST.get('password')
         sms_code_client = request.POST.get('sms_code')
         access_token = request.POST.get('access_token')
+
 
         # 2.校验参数
         # 判断参数是否齐全
@@ -131,10 +143,11 @@ class QQUserView(View):
         if not re.match(r'^[0-9A-Za-z]{8,20}$', password):
             return http.HttpResponseForbidden('请输入8-20位的密码')
 
+
         # 3.判断短信验证码是否一致
         # 创建 redis 链接对象:
         redis_conn = get_redis_connection('verify_code')
-        # 从 redis 中获取 sms_code 值:
+        # 从 redis 中获取 sms_code 值
         sms_code_server = redis_conn.get('sms_%s' % mobile)
         # 判断获取出来的有没有:
         if sms_code_server is None:
@@ -154,7 +167,7 @@ class QQUserView(View):
         try:
             user = User.objects.get(mobile=mobile)
         except User.DoesNotExist:
-            # 用户不存在,新建用户
+            #用户名不存在，新建用户
             user = User.objects.create_user(username=mobile, password=password, mobile=mobile)
         else:
             # 如果用户存在，检查用户密码
@@ -171,7 +184,7 @@ class QQUserView(View):
         login(request, user)
 
         # 7.响应绑定结果
-        next = request.GET.get('state')
+        next = request.GET.get('next/','/')
         response = redirect(next)
 
         # 8.登录时用户名写入到 cookie，有效期15天
@@ -179,3 +192,19 @@ class QQUserView(View):
 
         # 9.响应
         return response
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

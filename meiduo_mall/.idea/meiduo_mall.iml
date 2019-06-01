@@ -17,7 +17,7 @@
       <sourceFolder url="file://$MODULE_DIR$/meiduo_mall/apps" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/虚拟环境" />
     </content>
-    <orderEntry type="jdk" jdkName="Python 3.6 (meiduo_mall)" jdkType="Python SDK" />
+    <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
   <component name="TemplatesService">

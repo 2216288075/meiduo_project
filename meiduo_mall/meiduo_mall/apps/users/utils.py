@@ -2,7 +2,6 @@ from django.contrib.auth.backends import ModelBackend
 import re
 from .models import User
 
-
 def get_user_by_account(account):
     """
     根据account查询用户
@@ -11,7 +10,7 @@ def get_user_by_account(account):
     """
     try:
         if re.match('^1[3-9]\d{9}$', account):
-            # 手机号登录
+            #手机号登录
             user = User.objects.get(mobile=account)
         else:
             # 用户名登录

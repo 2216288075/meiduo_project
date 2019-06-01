@@ -37,7 +37,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/虚拟环境"
+VIRTUAL_ENV="/Users/LIU/Documents/美多/meiduo_mall/虚拟环境"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"

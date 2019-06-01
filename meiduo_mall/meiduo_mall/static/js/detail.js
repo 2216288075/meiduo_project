@@ -109,7 +109,7 @@ var vm = new Vue({
 		// 保存用户浏览记录
 		save_browse_histories(){
         	if (this.sku_id) {
-        		var url = this.hots + '/browse_histories/';
+        		var url = this.host + '/browse_histories/';
 				axios.post(url, {
 						'sku_id':this.sku_id
 					}, {
@@ -129,7 +129,7 @@ var vm = new Vue({
 		// 记录商品详情的访问量
 		detail_visit(){
         	if (this.category_id) {
-        		var url = this.hots + '/detail/visit/' + this.category_id + '/';
+        		var url = this.host + '/detail/visit/' + this.category_id + '/';
 				axios.post(url, {}, {
 						headers: {
 							'X-CSRFToken':getCookie('csrftoken')
@@ -192,12 +192,13 @@ var vm = new Vue({
         // 获取商品评价信息
         get_goods_comment(){
             if (this.sku_id) {
-                var url = this.hots + '/comment/'+ this.sku_id +'/';
+                var url = this.host + '/comments/'+ this.sku_id +'/';
                 axios.get(url, {
                         responseType: 'json'
                     })
                     .then(response => {
-                        this.comments = response.data.goods_comment_list;
+                        this.comments = response.data.comment_list;
+                        console.log(response.data.comment_list)
                         for(var i=0; i<this.comments.length; i++){
                             this.comments[i].score_class = this.score_classes[this.comments[i].score];
                         }

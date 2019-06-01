@@ -5,9 +5,8 @@ from django.shortcuts import render
 # Create your views here.
 from django.views import View
 
-from areas.models import Area
+from .models import Area
 from meiduo_mall.utils.response_code import RETCODE
-
 from django.core.cache import cache
 
 
@@ -50,9 +49,6 @@ class ProvinceAreasView(View):
 
 
 
-
-
-
 class SubAreasView(View):
     """子级地区：市和区县"""
 
@@ -91,3 +87,5 @@ class SubAreasView(View):
 
         # 3.响应市或区数据
         return JsonResponse({'code': RETCODE.OK, 'errmsg': 'OK', 'sub_data': sub_data})
+
+

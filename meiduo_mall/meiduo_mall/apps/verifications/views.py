@@ -1,110 +1,111 @@
-from django import http
+import random
+import logging
+logger = logging.getLogger('django')
 
-# Create your views here.
-from django.utils.crypto import random
+from django import http
 from django.views import View
 from django_redis import get_redis_connection
-
 from meiduo_mall.libs.captcha.captcha import captcha
-from meiduo_mall.libs.yuntongxun.ccp_sms import CCP
-from meiduo_mall.settings.dev import logger
+from celery_tasks.sms.tasks import ccp_send_sms_code
 from meiduo_mall.utils import constants
 from meiduo_mall.utils.response_code import RETCODE
-from celery_tasks.sms.tasks import ccp_send_sms_code
-
 
 
 class ImageCodeView(View):
     """图形验证码"""
 
+    """
+    参数名	类型	是否必传	说明
+    uuid	string	是	唯一编号
+    """
     def get(self, request, uuid):
         """
         :param request: 请求对象
-        :param uuid: 当前用户的唯一id
+        :param uuid: 唯一标识图形验证码所属于的用户
         :return: image/jpg
         """
-        # 生成图片验证码
-        text, image = captcha.generate_captcha()
 
-        # 保存图片验证码
+        #生成图片验证码
+        text,image = captcha.generate_captcha()
+
+        #获取redis连接对象
         redis_conn = get_redis_connection('verify_code')
 
-        # 图形验证码有效期，单位：秒
-        # IMAGE_CODE_REDIS_EXPIRES = 300
-        redis_conn.setex('img_%s' % uuid, 300, text)
+        #保存图片验证码
+        #redis_conn.setex(键，过期时间，值)
+        redis_conn.setex('img_%s' % uuid, constants.IMAGE_CODE_REDIS_EXPIRES, text)
 
-        # 响应图片验证码
-        return http.HttpResponse(image, content_type='imgae/jpg')
+        #响应图片验证码
+        return http.HttpResponse(image,content_type='image/jpg')
+
 
 
 class SMSCodeView(View):
     """短信验证码"""
 
-    def get(self, reqeust, mobile, sms_code_client=None):
+    """
+    参数名	类型	是否必传	说明
+    mobile	string	是	手机号
+    image_code	string	是	图形验证码
+    image_code_id	string	是	唯一编号
+    """
+
+    def get(self, reqeust, mobile):
         """
         :param reqeust: 请求对象
         :param mobile: 手机号
         :return: JSON
         """
-        # 3. 创建连接到redis的对象
+
+
+        #1 创建连接到redis的对象
         redis_conn = get_redis_connection('verify_code')
 
+        #2 判断60秒内是否重复访问
         send_flag = redis_conn.get('send_flag_%s' % mobile)
-
         if send_flag:
             return http.JsonResponse({'code': RETCODE.THROTTLINGERR, 'errmsg': '发送短信过于频繁'})
 
-        # 1. 接收参数
-        image_code_client = reqeust.GET.get('image_code') #用户输入的图形验证码
-        uuid = reqeust.GET.get('image_code_id')   #当前图形验证码在数据库中的键
+        #3 接收参数
+        image_code_client = reqeust.GET.get('image_code')
+        uuid = reqeust.GET.get('image_code_id')
 
-        # 2. 校验参数
-        if not all([image_code_client, uuid]):
+        #4 验证参数
+        if not all([image_code_client,uuid]):
             return http.JsonResponse({'code': RETCODE.NECESSARYPARAMERR, 'errmsg': '缺少必传参数'})
 
-        # 4. 提取图形验证码
-        image_code_server = redis_conn.get('img_%s' % uuid)   #数据库中的验证码的值
+        #5 提取图形验证码
+        image_code_server = redis_conn.get('img_%s' % uuid)
         if image_code_server is None:
             # 图形验证码过期或者不存在
             return http.JsonResponse({'code': RETCODE.IMAGECODEERR, 'errmsg': '图形验证码失效'})
 
-        # 5. 删除图形验证码，避免恶意测试图形验证码
+        #6 删除图形验证码，避免同一个图形验证码多次比较
         try:
             redis_conn.delete('img_%s' % uuid)
         except Exception as e:
             logger.error(e)
 
-        # 6. 对比图形验证码
+        #7 对比图形验证码
         image_code_server = image_code_server.decode()  # bytes转字符串
         if image_code_client.lower() != image_code_server.lower():  # 转小写后比较
             return http.JsonResponse({'code': RETCODE.IMAGECODEERR, 'errmsg': '输入图形验证码有误'})
 
-        # 7. 生成短信验证码：生成6位数验证码
-        sms_code = '%06d' % random.randint(0, 999999)
+        #8 生成短信验证码：生成6位数验证码
+        sms_code = random.randint(0,999999)  #sms_code = 6位随机验证码
         logger.info(sms_code)
+        print(sms_code)
 
-        # 创建Redis管道
+        #9 创建Redis管道
         pl = redis_conn.pipeline()
-
-        # 8. 保存短信验证码
-        # 短信验证码有效期，单位：秒
-        # SMS_CODE_REDIS_EXPIRES = 300
-
         # 将Redis请求添加到队列
         pl.setex('sms_%s' % mobile, constants.SMS_CODE_REDIS_EXPIRES, sms_code)
-        pl.setex('send_flag_%s' % mobile, 60, 1)
-
+        pl.setex('send_flag_%s' % mobile, constants.SEND_SMS_CODE_INTERVAL, 1)
         # 执行请求
         pl.execute()
 
-        # 9. 发送短信验证码
-        # 短信模板
-        # CCP().send_template_sms(mobile, [sms_code, 5],1)
-
-        print("尝试短信发送")
         # Celery 异步发送短信验证码
         ccp_send_sms_code.delay(mobile, sms_code)
-        print("尝试已发送")
 
-        # 10. 响应结果
+        #11 响应结果
         return http.JsonResponse({'code': RETCODE.OK, 'errmsg': '发送短信成功'})

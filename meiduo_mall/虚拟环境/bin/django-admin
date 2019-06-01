@@ -1,4 +1,4 @@
-#!/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/虚拟环境/bin/python
+#!/Users/LIU/Documents/美多/meiduo_mall/虚拟环境/bin/python
 # -*- coding: utf-8 -*-
 import re
 import sys

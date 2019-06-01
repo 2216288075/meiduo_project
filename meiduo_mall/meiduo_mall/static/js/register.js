@@ -204,7 +204,6 @@ var vm = new Vue({
 			this.check_sms_code();
 			this.check_allow();
 
-
 			if(this.error_name == true || this.error_password == true || this.error_check_password == true
 				|| this.error_phone == true || this.error_sms_code == true || this.error_allow == true) {
                 // 不满足注册条件：禁用表单

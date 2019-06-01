@@ -1,26 +1,13 @@
+# 导入:
 from django.conf import settings
 from itsdangerous import TimedJSONWebSignatureSerializer
 from itsdangerous import BadData
 
-def generate_access_token(openid):
-    """
-    签名 openid
-    :param openid: 用户的 openid
-    :return: access_token
-    """
-
-    # QQ登录保存用户数据的token有效期
-    # settings.SECRET_KEY: 加密使用的秘钥
-    # SAVE_QQ_USER_TOKEN_EXPIRES = 600: 过期时间
-    serializer = TimedJSONWebSignatureSerializer(settings.SECRET_KEY,
-                                                 expires_in=4000)
-    data = {'openid': openid}
-    token = serializer.dumps(data)
-    return token.decode()
-
-
 
 # 定义函数, 检验传入的 access_token 里面是否包含有 openid
+from meiduo_mall.utils import constants
+
+
 def check_access_token(access_token):
     """
     检验用户传入的 token
@@ -30,7 +17,7 @@ def check_access_token(access_token):
 
     # 调用 itsdangerous 中的类, 生成对象
     serializer = TimedJSONWebSignatureSerializer(settings.SECRET_KEY,
-                                                 expires_in=5000)
+                                                 expires_in=constants.SAVE_QQ_USER_TOKEN_EXPIRES)
 
     try:
         # 尝试使用对象的 loads 函数

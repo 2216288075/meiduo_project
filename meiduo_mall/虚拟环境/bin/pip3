@@ -1,4 +1,4 @@
-#!/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/虚拟环境/bin/python -x
+#!/Users/LIU/Documents/美多/meiduo_mall/虚拟环境/bin/python -x
 # EASY-INSTALL-ENTRY-SCRIPT: 'pip==19.0.3','console_scripts','pip3'
 __requires__ = 'pip==19.0.3'
 import re

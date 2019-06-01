@@ -10,54 +10,64 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
-import os,sys
+import os
+import sys
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-sys.path.insert(0,os.path.join(BASE_DIR,"apps"))
+sys.path.insert(0,os.path.join(BASE_DIR,'apps'))
+
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '91dc6wh47%t+65+gg%fjkecnd+yuy(h$o(t&ngorb^%e*1)y*l'
+SECRET_KEY = 'ene%xc+i@!ftpzw40tw((@ak9&4#sp^7e((579siecvk7(1ju6'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
-#python manage.py runserver 192.168.100.2:8080
 
 # Application definition
 
 INSTALLED_APPS = [
+    # 添加 django-cors-headers 的配置内容, 使其可以进行cors跨域
+    'corsheaders',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'users',
-    'contents',
-    'oauth',
-    'goods',
-    'carts',
-    'orders',
-    'areas',
-    'corsheaders',
+    'users', # 用户模块应用
+    'contents', # 首页
+    'verifications',# 验证码
+    'oauth' , # QQ登陆
+    'areas',  # 收货地址
+    'goods',# 商品
+    'haystack',# 全文检索
+    'carts', # 购物车
+    'orders', # 支付
+    'payment', # 支付宝
+
 ]
 
-from corsheaders.middleware import CorsMiddleware
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
 
+    # # 添加 django-cors-headers 的配置内容, 使其可以进行cors跨域
     'corsheaders.middleware.CorsMiddleware',
+
     'django.middleware.common.CommonMiddleware',
 
     'django.middleware.csrf.CsrfViewMiddleware',
+
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -93,11 +103,11 @@ WSGI_APPLICATION = 'meiduo_mall.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql', # 数据库引擎
-        'HOST': '127.0.0.1', # 数据库主机
+        'HOST': '106.52.66.63', # 数据库主机
         'PORT': 3306, # 数据库端口
-        'USER': 'itcast', # 数据库用户名
+        'USER': 'root', # 数据库用户名
         'PASSWORD': '123456', # 数据库用户密码
-        'NAME': 'meiduo_mall' # 数据库名字
+        'NAME': 'meiduo' # 数据库名字
     },
 }
 
@@ -138,36 +148,45 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
-STATIC_URL = '/static/'
+# 配置静态文件加载路径
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+STATIC_URL = '/static/'
 
 
 
+#配置Redis数据库
 CACHES = {
     "default": { # 默认
         "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": "redis://127.0.0.1:6379/0",
+        "LOCATION": "redis://106.52.66.63:6379/10",
         "OPTIONS": {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
         }
     },
     "session": { # session
         "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": "redis://127.0.0.1:6379/1",
+        "LOCATION": "redis://106.52.66.63:6379/11",
         "OPTIONS": {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
         }
     },
     "verify_code": { # 验证码
         "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": "redis://127.0.0.1:6379/2",
+        "LOCATION": "redis://106.52.66.63:6379/12",
         "OPTIONS": {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
         }
     },
-    "carts": {
+    "history": {  # 用户浏览记录
         "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": "redis://127.0.0.1:6379/4",
+        "LOCATION": "redis://106.52.66.63:6379/14",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        }
+    },
+    "carts": {  # 购物车
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://106.52.66.63:6379/15",
         "OPTIONS": {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
         }
@@ -177,17 +196,7 @@ SESSION_ENGINE = "django.contrib.sessions.backends.cache"
 SESSION_CACHE_ALIAS = "session"
 
 
-import logging
-
-# 创建日志记录器
-logger = logging.getLogger('django')
-# 输出日志
-logger.debug('测试logging模块debug')
-logger.info('测试logging模块info')
-logger.error('测试logging模块error')
-
-
-
+#配置工程日志
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,  # 是否禁用已经存在的日志器
@@ -229,9 +238,22 @@ LOGGING = {
     }
 }
 
-#
+
+#日志记录器的使用
+import logging
+
+# 创建日志记录器
+logger = logging.getLogger('django')
+# 输出日志
+logger.debug('测试logging模块debug')
+logger.info('测试logging模块info')
+logger.error('测试logging模块error')
+
+
+
 # 指定本项目用户模型类
 AUTH_USER_MODEL = 'users.User'
+
 
 # 指定自定义的用户认证后端
 
@@ -243,30 +265,12 @@ LOGIN_URL = '/login/'
 
 
 
-
-#QQ
+#QQ 登录参数
 QQ_CLIENT_ID = '101518219'
 QQ_CLIENT_SECRET = '418d84ebdc7241efb79536886ae95224'
 QQ_REDIRECT_URI = 'http://www.meiduo.site:8000/oauth_callback'
 
 
-# 发送短信的相关设置, 这些设置是当用户没有发送相关字段时, 默认使用的内容:
-# 发送短信必须进行的设置:
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-# 我们使用的 smtp服务器 地址
-EMAIL_HOST = 'smtp.163.com'
-# 端口号
-EMAIL_PORT = 25
-# 下面的内容是可变的, 随后台设置的不同而改变:
-# 发送邮件的邮箱
-EMAIL_HOST_USER = '17687949560@163.com'
-# 在邮箱中设置的客户端授权密码
-EMAIL_HOST_PASSWORD = 'aa12345678'
-# 收件人看到的发件人
-EMAIL_FROM = '嘿嘿嘿<17687949560@163.com>'
-
-# 邮箱验证链接
-EMAIL_VERIFY_URL = 'http://www.meiduo.site:8000/emails/verification/'
 
 # 添加 django-cors-headers 的白名单, 使白名单中的 host 可以进行跨域请求
 CORS_ORIGIN_WHITELIST = (
@@ -288,3 +292,58 @@ CORS_ORIGIN_WHITELIST = (
 )
 # 允许白名单中的 host 跨域请求时携带 cookie
 CORS_ALLOW_CREDENTIALS = True
+
+
+
+# 发送短信的相关设置, 这些设置是当用户没有发送相关字段时, 默认使用的内容:
+# 发送短信必须进行的设置:
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# 我们使用的 smtp服务器 地址
+EMAIL_HOST = 'smtp.163.com'
+# 端口号
+EMAIL_PORT = 25
+# 下面的内容是可变的, 随后台设置的不同而改变:
+# 发送邮件的邮箱
+EMAIL_HOST_USER = '17687949560@163.com'
+# 在邮箱中设置的客户端授权密码
+EMAIL_HOST_PASSWORD = 'aa12345678'
+# 收件人看到的发件人
+EMAIL_FROM = '嘿嘿嘿<17687949560@163.com>'
+
+# 邮箱验证链接
+EMAIL_VERIFY_URL = 'http://www.meiduo.site:8000/emails/verification/'
+
+
+# FDFS客户端的配置文件.
+FDFS_CLIENT_CONF = os.path.join(BASE_DIR, 'utils/fastdfs/client.conf')
+# 访问FDFS中存储的文件时,地址有可能变化, 所以我们把地址放在这里记录:
+FDFS_URL = 'http://106.52.66.63:8888/'
+
+
+
+# 指定django系统使用的文件存储类:
+DEFAULT_FILE_STORAGE = 'meiduo_mall.utils.fastdfs.fastdfs_storage.FastDFSStorage'
+
+
+
+# Haystack
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
+        'URL': 'http://106.52.66.63:9200/', # Elasticsearch服务器ip地址，端口号固定为9200
+        'INDEX_NAME': 'meiduo_mall', # Elasticsearch建立的索引库的名称
+    },
+}
+
+# 当添加、修改、删除数据时，自动生成索引
+HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
+
+# 可以在 dev.py 中添加如下代码, 用于决定每页显示数据条数:
+HAYSTACK_SEARCH_RESULTS_PER_PAGE = 5
+
+
+#支付宝SDK配置参数
+ALIPAY_APPID = '2016093000628866'
+ALIPAY_DEBUG = True
+ALIPAY_URL = 'https://openapi.alipaydev.com/gateway.do'
+ALIPAY_RETURN_URL = 'http://www.meiduo.site:8000/payment/status/'

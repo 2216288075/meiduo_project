@@ -29,7 +29,7 @@ end
 # unset irrelevant variables
 deactivate nondestructive
 
-set -gx VIRTUAL_ENV "/Users/LIU/Desktop/美多商城/meiduo_project/meiduo_mall/虚拟环境"
+set -gx VIRTUAL_ENV "/Users/LIU/Documents/美多/meiduo_mall/虚拟环境"
 
 set -gx _OLD_VIRTUAL_PATH $PATH
 set -gx PATH "$VIRTUAL_ENV/bin" $PATH

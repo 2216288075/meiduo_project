@@ -17,7 +17,8 @@
 			<div class="fr">
                 <div v-if="username" class="login_btn fl">
                      欢迎您：<em>[[ username ]]</em>
-                    <span>|</span>
+                     <span>|</span>
+                <!--修改如下代码,使其能够退出登录-->
                      <a href="{{ url('users:logout') }}">退出</a>
                 </div>
                 <div v-else class="login_btn fl">
@@ -38,7 +39,7 @@
 	</div>
 
 	<div class="search_bar clearfix">
-		<a href="index.html" class="logo fl"><img src="../static/images/logo.png"></a>
+		<a href="{{ url('contents:index') }}" class="logo fl"><img src="../static/images/logo.png"></a>
 		<div class="search_wrap fl">
 			<form method="get" action="/search/" class="search_con">
                 <input type="text" class="input_text fl" name="q" placeholder="搜索商品">
@@ -53,7 +54,7 @@
 		</div>
 	</div>
 
-    <div class="total_count">全部商品<em>[[ total_count ]]</em>件</div>
+	<div class="total_count">全部商品<em>[[ total_count ]]</em>件</div>
     <ul class="cart_list_th clearfix">
         <li class="col01">商品名称</li>
         <li class="col03">商品价格</li>
@@ -76,7 +77,6 @@
         <li class="col07">[[ cart_sku.amount ]]元</li>
         <li class="col08"><a @click="on_delete(index)">删除</a></li>
     </ul>
-
     <ul class="settlements">
         <li class="col01">
             <input type="checkbox"
@@ -94,7 +94,6 @@
             <a href="{{ url('orders:settlement') }}">去结算</a>
         </li>
     </ul>
-
 	<div class="footer">
 		<div class="foot_link">
 			<a href="#">关于我们</a>
@@ -109,10 +108,14 @@
 		<p>电话：010-****888    京ICP备*******8号</p>
 	</div>
 	</div>
+    <div>
+        {{ catr_skus }}
+    </div>
     <script>
         var cart_skus = {{ cart_skus | safe }};
     </script>
     <script type="text/javascript" src="../static/js/common.js"></script>
+    <script type="text/javascript" src="{{ static('js/base.js') }}"></script>
 	<script type="text/javascript" src="../static/js/cart.js"></script>
 </body>
 </html>

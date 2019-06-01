@@ -22,8 +22,8 @@ def merge_cart_cookie_to_redis(request, user, response):
     new_dict = {}
     new_add = []
     new_remove = []
-    # 同步cookie中购物车数据
-    for sku_id, item in cart_dict.items():
+    #同步cookie 中购物车数据
+    for sku_id,item in cart_dict.items():
         new_dict[sku_id] = item['count']
 
         if item['selected']:
@@ -32,8 +32,8 @@ def merge_cart_cookie_to_redis(request, user, response):
             new_remove.append(sku_id)
 
     # 将new_cart_dict写入到Redis数据库
-    redis_conn = get_redis_connection('carts')
-    pl = redis_conn.pipeline()
+    redis_coon = get_redis_connection('carts')
+    pl = redis_coon.pipeline()
     pl.hmset('carts_%s' % user.id, new_dict)
     # 将勾选状态同步到Redis数据库
     if new_add:

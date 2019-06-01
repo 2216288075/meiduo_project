@@ -1,13 +1,14 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
-	<title>美多商城-商品详情</title>
-	<link rel="stylesheet" type="text/css" href="../static/css/reset.css">
-	<link rel="stylesheet" type="text/css" href="../static/css/main.css">
-    <script type="text/javascript" src="../static/js/host.js"></script>
-	<script type="text/javascript" src="../static/js/vue-2.5.16.js"></script>
-    <script type="text/javascript" src="../static/js/axios-0.18.0.min.js"></script>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>美多商城-商品详情</title>
+    <link rel="stylesheet" type="text/css" href="{{ static('css/reset.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ static('css/main.css') }}">
+    <script type="text/javascript" src="{{ static('js/host.js') }}"></script>
+    <script type="text/javascript" src="{{ static('js/vue-2.5.16.js') }}"></script>
+    <script type="text/javascript" src="{{ static('js/axios-0.18.0.min.js') }}"></script>
+    <script type="text/javascript" src="{{ static('js/jquery-1.12.4.min.js') }}"></script>
 </head>
 <body>
 	<div id="app" v-cloak>
@@ -15,17 +16,15 @@
 		<div class="header">
 			<div class="welcome fl">欢迎来到美多商城!</div>
 			<div class="fr">
-                <div v-if="username" class="login_btn fl">
-                     欢迎您：<em>[[ username ]]</em>
-                    <span>|</span>
-                     <a href="{{ url('users:logout') }}">退出</a>
-                </div>
-                <div v-else class="login_btn fl">
-                    <a href="{{ url('users:login') }}">登录</a>
-                    <span>|</span>
-                    <a href="{{ url('users:register') }}">注册</a>
-                </div>
-                <div class="user_link fl">
+				<div class="login_info fl">
+					欢迎您：<em>张 山</em>
+				</div>
+				<div class="login_btn fl">
+					<a href="{{ url('users:login') }} ">登录</a>
+					<span>|</span>
+					<a href="{{ url('users:login') }}">注册</a>
+				</div>
+				<div class="user_link fl">
                     <span>|</span>
                     <a href="{{ url('users:info') }}">用户中心</a>
                     <span>|</span>
@@ -38,7 +37,7 @@
 	</div>
 
 	<div class="search_bar clearfix">
-		<a href="index.html" class="logo fl"><img src="{{ static('images/logo02.png') }}"></a>
+		<a href="{{ url('contents:index') }}" class="logo fl"><img src="{{ static('images/logo02.png') }}"></a>
 		<div class="search_wrap fl">
 			<form method="get" action="/search/" class="search_con">
                 <input type="text" class="input_text fl" name="q" placeholder="搜索商品">
@@ -52,7 +51,7 @@
 			</ul>
 		</div>
 
-        <div @mouseenter="get_carts" class="guest_cart fr" v-cloak>
+		<div @mouseenter="get_carts" class="guest_cart fr" v-cloak>
             <a href="{{ url('carts:info') }}" class="cart_name fl">我的购物车</a>
             <div class="goods_count fl" id="show_count">[[ cart_total_count ]]</div>
             <ul class="cart_goods_show">
@@ -63,7 +62,6 @@
                 </li>
             </ul>
         </div>
-
 	</div>
 
 	<div class="navbar_con">
@@ -267,45 +265,44 @@
 		<a href="#">mac电脑</a>
 	</div>
 
-	<div class="goods_detail_con clearfix">
-		<div class="goods_detail_pic fl"><img src="../static/images/goods_450.jpg"></div>
-		<div class="goods_detail_list fr">
-			<h3>Apple MacBook Pro 13.3英寸笔记本 银色</h3>
-			<p>【全新2017款】MacBook Pro,一身才华，一触，即发 了解【黑五返场特惠】 更多产品请点击【美多官方Apple旗舰店】</p>
-			<div class="price_bar">
-				<span class="show_pirce">¥<em>11388.00</em></span>
-				<a href="javascript:;" class="goods_judge">449人评价</a>
-			</div>
-			<div class="goods_num clearfix">
-				<div class="num_name fl">数 量：</div>
-				<div class="num_add fl">
-					<input type="text" class="num_show fl" value="1">
-					<a href="javascript:;" class="add fr">+</a>
-					<a href="javascript:;" class="minus fr">-</a>	
-				</div> 
-			</div>
-			<div class="type_select">
-				<label>屏幕尺寸:</label>
-				<a href="javascript:;" class="select">13.3英寸</a>
-				<a href="javascript:;">15.4英寸</a>
-			</div>
-			<div class="type_select">
-				<label>颜色:</label>
-				<a href="javascript:;" class="select">深灰色</a>
-				<a href="javascript:;">银</a>
-			</div>
-			<div class="type_select">
-				<label>版本:</label>
-				<a href="javascript:;" class="select">core i5/8G内存/256G存储</a>
-				<a href="javascript:;">core i5/8G内存/128G存储</a>
-				<a href="javascript:;">core i5/8G内存/512G存储/Multi-Touch Bar</a>
-			</div>
-			<div class="total">总价：<em>11388.00元</em></div>
+    <div class="goods_detail_con clearfix">
+        <div class="goods_detail_pic fl"><img src="{{ sku.default_image_url }}"></div>
+        <div class="goods_detail_list fr">
+            <h3>{{ sku.name }}</h3>
+            <p>{{ sku.caption }}</p>
+            <div class="price_bar">
+                <span class="show_pirce">¥<em>{{ sku.price }}</em></span>
+                <a href="javascript:;" class="goods_judge">[[ comments.length ]]人评价</a>
+            </div>
+            <div class="goods_num clearfix">
+                <div class="num_name fl">数 量：</div>
+                <div class="num_add fl">
+                    <input v-model="sku_count" @blur="check_sku_count" type="text" class="num_show fl">
+                    <a @click="on_addition" class="add fr">+</a>
+                    <a @click="on_minus" class="minus fr">-</a>
+                </div>
+            </div>
+            {#...商品规格...#}
+            {% for spec in specs %}
+            <div class="type_select">
+                <label>{{ spec.name }}:</label>
+                {% for option in spec.spec_options %}
+                    {% if option.sku_id == sku.id %}
+                    <a href="javascript:;" class="select">{{ option.value }}</a>
+                    {% elif option.sku_id %}
+                    <a href="{{ url('goods:detail', args=(option.sku_id, )) }}">{{ option.value }}</a>
+                    {% else %}
+                    <a href="javascript:;">{{ option.value }}</a>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            {% endfor %}
+            <div class="total" v-cloak>总价：<em>[[ sku_amount ]]元</em></div>
             <div class="operate_btn">
                 <a @click="add_cart" class="add_cart" id="add_cart">加入购物车</a>
             </div>
-		</div>
-	</div>
+        </div>
+    </div>
 
 	<div class="main_wrap clearfix">
 		<div class="l_wrap fl clearfix">
@@ -327,45 +324,44 @@
 		</div>
 
 		<div class="r_wrap fr clearfix">
-			<ul class="detail_tab clearfix">
-				<li class="active">商品详情</li>
-				<li>规格与包装</li>
-				<li>商品评价(1)</li>
-				<li>售后服务</li>
-			</ul>
-			<div class="tab_content current">
-				<dl>
-					<dt>商品详情：</dt>
-					<dd>它纤薄如刃，轻盈如羽，却又比以往速度更快、性能更强大。它为你展现的，是迄今最明亮、最多彩的 Mac 笔记本显示屏。它更配备了触控栏，一个内置于键盘的玻璃面多点触控条，让你能在需要时快速取用各种工具。MacBook Pro 是对我们突破性理念的一场出色演绎，而它，也正期待着演绎你的奇思妙想。 </dd>
-				</dl>
-			</div>
-			<div class="tab_content">
-				<dl>
-					<dt>规格与包装：</dt>
-					<dd>它纤薄如刃，轻盈如羽，却又比以往速度更快、性能更强大。它为你展现的，是迄今最明亮、最多彩的 Mac 笔记本显示屏。它更配备了触控栏，一个内置于键盘的玻璃面多点触控条，让你能在需要时快速取用各种工具。MacBook Pro 是对我们突破性理念的一场出色演绎，而它，也正期待着演绎你的奇思妙想。 </dd>
-				</dl>
-			</div>
-			<div class="tab_content">
-				<ul class="judge_list_con">
-					<li class="judge_list fl">
-						<div class="user_info fl">
-							<img src="../static/images/cat.jpg">
-							<b>潇***啼</b>
-						</div>
-						<div class="judge_info fl">
-							<div class="stars_five"></div>
-							<div class="judge_detail">派送非常快，第二天上午就收到。2天使用初步总结，前一部手机也是华为P9plus.MATE10pro包装原封未拆精致大气。拆开后第一眼就看到宝石蓝的手机，非常惊艳；然后就是配件一应俱全。开机各方面设置，把通讯录、短信等同步好，同品牌手机同步很快。和P9plus一样的后置指纹识别很方便。录制指纹容易，解锁非常快，秒开！屏幕完好，默认分辨率显示效果很好。</div>
-						</div>
-					</li>			
-				</ul>
-			</div>
-			<div class="tab_content">
-				<dl>
-					<dt>售后服务：</dt>
-					<dd>它纤薄如刃，轻盈如羽，却又比以往速度更快、性能更强大。它为你展现的，是迄今最明亮、最多彩的 Mac 笔记本显示屏。它更配备了触控栏，一个内置于键盘的玻璃面多点触控条，让你能在需要时快速取用各种工具。MacBook Pro 是对我们突破性理念的一场出色演绎，而它，也正期待着演绎你的奇思妙想。 </dd>
-				</dl>
-			</div>
-		</div>
+            <ul class="detail_tab clearfix">
+                <li @click="on_tab_content('detail')" :class="tab_content.detail?'active':''">商品详情</li>
+                <li @click="on_tab_content('pack')" :class="tab_content.pack?'active':''">规格与包装</li>
+                <li @click="on_tab_content('service')" :class="tab_content.service?'active':''">售后服务</li>
+                <li @click="on_tab_content('comment')" :class="tab_content.comment?'active':''">商品评价([[ comments.length ]])</li>
+            </ul>
+            <div @click="on_tab_content('detail')" class="tab_content" :class="tab_content.detail?'current':''">
+                <dl>
+                    <dt>商品详情：</dt>
+                    <dd>{{ goods.desc_detail|safe }}</dd>
+                </dl>
+            </div>
+            <div @click="on_tab_content('pack')" class="tab_content" :class="tab_content.pack?'current':''">
+                <dl>
+                    <dt>规格与包装：</dt>
+                    <dd>{{ goods.desc_pack|safe }}</dd>
+                </dl>
+            </div>
+            <div @click="on_tab_content('comment')" class="tab_content" :class="tab_content.comment?'current':''">
+                <ul class="judge_list_con">
+                    <li class="judge_list fl" v-for="comment in comments">
+                        <div class="user_info fl">
+                            <b>[[comment.username]]</b>
+                        </div>
+                        <div class="judge_info fl">
+                            <div :class="comment.score_class"></div>
+                            <div class="judge_detail">[[comment.comment]]</div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div @click="on_tab_content('service')" class="tab_content" :class="tab_content.service?'current':''">
+                <dl>
+                    <dt>售后服务：</dt>
+                    <dd>{{ goods.desc_service|safe }}</dd>
+                </dl>
+            </div>
+        </div>
 
 		
 	</div>
@@ -384,12 +380,12 @@
 		<p>电话：010-****888    京ICP备*******8号</p>
 	</div>
 	</div>
-	<script>
-        var sku_price = "";
-        var category_id = "";
-        var sku_id = "";
+    <script>
+        var price = "{{ sku.price }}";
+        var category_id = "{{ goods.category3.id }}";
+        var sku_id = "{{ sku.id }}";
     </script>
-	<script type="text/javascript" src="../static/js/common.js"></script>
-	<script type="text/javascript" src="../static/js/detail.js"></script>
+    <script type="text/javascript" src="{{ static('js/common.js') }}"></script>
+    <script type="text/javascript" src="{{ static('js/detail.js') }}"></script>
 </body>
 </html>

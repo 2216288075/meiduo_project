@@ -1,26 +1,40 @@
 import json
 import re
-from audioop import reverse
 from django import http
-from django.contrib.auth import login, authenticate
-from django.db import DatabaseError
+from django.contrib.auth import authenticate
+from django.contrib.auth.views import login
 from django.shortcuts import render, redirect
-from django.views import View
 from django.urls import reverse
+from django.views import View
 from django_redis import get_redis_connection
+from pymysql import DatabaseError
 
-from meiduo_mall.settings.dev import logger
+from carts.utils import merge_cart_cookie_to_redis
+from goods.models import SKU
 from meiduo_mall.utils.response_code import RETCODE
 from .models import User, Address
-
 from django.contrib.auth import logout
+from meiduo_mall.utils.views import LoginRequiredMixin, LoginRequiredJSONMixin
+from celery_tasks.email.tasks import send_verify_email
 
-
+import logging
+logger = logging.getLogger('django')
 
 
 
 class RegisterView(View):
-    """用户注册"""
+    """
+    用户注册
+
+    参数名	    类型	    必传	 说明
+    username	string	是	 用户名
+    password	string	是	 密码
+    password2	string	是	 确认密码
+    mobile	    string	是	 手机号
+    sms_code	string	是	 短信验证码
+    allow	    string	是	 是否同意用户协议
+
+    """
 
     def get(self, request):
         """
@@ -29,6 +43,7 @@ class RegisterView(View):
         :return: 注册界面
         """
         return render(request, 'register.html')
+
 
     def post(self, request):
         """
@@ -42,9 +57,6 @@ class RegisterView(View):
         mobile = request.POST.get('mobile')
         allow = request.POST.get('allow')
         sms_code_client = request.POST.get('sms_code')
-
-        a=[username,password,password2,mobile,allow,sms_code_client]
-        print(a)
 
         # 获取 redis 链接对象
         redis_conn = get_redis_connection('verify_code')
@@ -61,6 +73,7 @@ class RegisterView(View):
         if sms_code_client != sms_code_server.decode():
             # 对比失败, 说明短信验证码有问题, 直接返回:
             return render(request, 'register.html', {'sms_code_errmsg': '输入短信验证码有误'})
+
 
         # 判断参数是否齐全
         if not all([username, password, password2, mobile, allow]):
@@ -81,36 +94,34 @@ class RegisterView(View):
         if allow != 'on':
             return http.HttpResponseForbidden('请勾选用户协议')
 
+        #保存注册数据
         try:
-            user =User.objects.create_user(username=username, password=password, mobile=mobile)
+            user = User.objects.create_user(username=username,password=password,mobile=mobile)
         except DatabaseError:
-            return render(request, 'register.html', {'register_errmsg': '注册失败'})
+            return render(request,'register.html',{'register_errmsg': '注册失败'})
 
-        # 实现状态保持
-        login(request, user)
-
+        #实现
         # 生成响应对象
-        response = redirect(reverse('contents:index'))
+        response =  redirect(reverse('contents:index'))
 
         # 在响应对象中设置用户名信息.
         # 将用户名写入到 cookie，有效期 15 天
-        response.set_cookie('username', user.username, max_age=3600 * 24 * 15)
-
-        # 返回响应结果
-        return response
+        response.set_cookie('username',user.username,max_age=3600 * 24 * 15)
 
 
 class UsernameCountView(View):
     """判断用户名是否重复注册"""
 
-    def get(self, request, username):
+    def get(self,request,username):
         """
         :param request: 请求对象
         :param username: 用户名
         :return: JSON
         """
         count = User.objects.filter(username=username).count()
-        return http.JsonResponse({'code': 200, 'errmsg': 'OK', 'count': count})
+        return http.JsonResponse({'code': RETCODE.OK, 'errmsg': 'OK', 'count': count})
+
+
 
 
 class MobileCountView(View):
@@ -123,25 +134,34 @@ class MobileCountView(View):
         :return: JSON
         """
         count = User.objects.filter(mobile=mobile).count()
-        return http.JsonResponse({'code': 200, 'errmsg': 'OK', 'count': count})
-
+        return http.JsonResponse({'code':RETCODE.OK,'errmsg':'OK','count':count})
 
 
 
 class LoginView(View):
     """用户名登录"""
+    """
+    参数名	类型	是否必传	说明
+    username	string	是	用户名
+    password	string	是	密码
+    remembered	string	是	是否记住用户
 
+    """
     def get(self, request):
         """提供登录界面的接口"""
+
         # 返回登录界面
         return render(request, 'login.html')
 
+
     def post(self, request):
-        """
-        实现登录逻辑
-        :param request: 请求对象
-        :return: 登录结果
-        """
+        """实现登录逻辑"""
+        # 1. 获取前端传递参数
+        # 2. 校验参数
+        # 3. 获取登录用户,并查看是否存在
+        # 4. 实现状态保持
+        # 5. 返回响应
+
         # 接受参数
         username = request.POST.get('username')
         password = request.POST.get('password')
@@ -151,7 +171,7 @@ class LoginView(View):
         # 判断参数是否齐全
         # 这里注意: remembered 这个参数可以是 None 或是 'on'
         # 所以我们不对它是否存在进行判断:
-        if not all([username, password]):
+        if not all([username,password]):
             return http.HttpResponseForbidden('缺少必传参数')
 
         # 判断用户名是否是5-20个字符
@@ -168,13 +188,11 @@ class LoginView(View):
             return render(request, 'login.html', {'account_errmsg': '用户名或密码错误'})
 
         # 实现状态保持
-        login(request, user)
-        # 设置状态保持的周期
+        login(request,user)
         if remembered != 'on':
             # 不记住用户：浏览器会话结束就过期
             request.session.set_expiry(0)
         else:
-            # 记住用户：None 表示两周后过期
             request.session.set_expiry(None)
 
         # 获取跳转过来的地址:
@@ -189,6 +207,9 @@ class LoginView(View):
 
         # 设置 cookie 信息
         response.set_cookie('username', user.username, max_age=3600 * 24 * 15)
+
+        # 合并购物车
+        response = merge_cart_cookie_to_redis(request=request, user=user, response=response)
 
         # 返回响应
         return response
@@ -215,11 +236,7 @@ class LogoutView(View):
 
 
 
-
-# 导入
-from meiduo_mall.utils.views import LoginRequiredMixin
-
-class UserInfoView(LoginRequiredMixin, View):
+class UserInfoView(LoginRequiredMixin,View):
     """用户中心"""
 
     def get(self, request):
@@ -238,20 +255,11 @@ class UserInfoView(LoginRequiredMixin, View):
 
 
 
-
-class EmailView(View):
+class EmailView(LoginRequiredJSONMixin,View):
     """添加邮箱"""
 
     def put(self, request):
         """实现添加邮箱逻辑"""
-
-        print('添加邮箱')
-
-        # 判断用户是否登录并返回JSON
-        if not request.user.is_authenticated():
-            return http.JsonResponse({'code': RETCODE.SESSIONERR, 'errmsg': '用户未登录'})
-        pass
-
         # 接收参数
         json_dict = json.loads(request.body.decode())
         email = json_dict.get('email')
@@ -268,17 +276,15 @@ class EmailView(View):
             request.user.save()
         except Exception as e:
             logger.error(e)
+            # DBERR = "5000"
             return http.JsonResponse({'code': RETCODE.DBERR, 'errmsg': '添加邮箱失败'})
 
-        # 导入:
-        from celery_tasks.email.tasks import send_verify_email
-        # 异步发送验证邮件
         verify_url = request.user.generate_verify_email_url()
-        send_verify_email.delay(email, verify_url)
+        send_verify_email.delay(email,verify_url)
+
 
         # 响应添加邮箱结果
         return http.JsonResponse({'code': RETCODE.OK, 'errmsg': '添加邮箱成功'})
-
 
 
 
@@ -309,7 +315,6 @@ class VerifyEmailView(View):
 
         # 返回邮箱验证结果
         return redirect(reverse('users:info'))
-
 
 
 
@@ -356,8 +361,12 @@ class AddressView(LoginRequiredMixin, View):
 
 
 
-# class CreateAddressView(LoginRequiredJSONMixin, View):
-class CreateAddressView( View):
+
+
+
+
+
+class CreateAddressView(LoginRequiredJSONMixin, View):
     """新增地址"""
 
     def post(self, request):
@@ -440,9 +449,7 @@ class CreateAddressView( View):
 
 
 
-
-# class UpdateDestroyAddressView(LoginRequiredJSONMixin, View):
-class UpdateDestroyAddressView( View):
+class UpdateDestroyAddressView(LoginRequiredJSONMixin, View):
     """修改和删除地址"""
 
     def put(self, request, address_id):
@@ -509,6 +516,7 @@ class UpdateDestroyAddressView( View):
                                   'errmsg': '更新地址成功',
                                   'address': address_dict})
 
+
     def delete(self, request, address_id):
         """删除地址"""
         try:
@@ -526,11 +534,7 @@ class UpdateDestroyAddressView( View):
         return http.JsonResponse({'code': RETCODE.OK, 'errmsg': '删除地址成功'})
 
 
-
-
-
-# class DefaultAddressView(LoginRequiredJSONMixin, View):
-class DefaultAddressView( View):
+class DefaultAddressView(LoginRequiredJSONMixin, View):
     """设置默认地址"""
 
     def put(self, request, address_id):
@@ -550,8 +554,7 @@ class DefaultAddressView( View):
         return http.JsonResponse({'code': RETCODE.OK, 'errmsg': '设置默认地址成功'})
 
 
-# class UpdateTitleAddressView(LoginRequiredJSONMixin, View):
-class UpdateTitleAddressView(View):
+class UpdateTitleAddressView(LoginRequiredJSONMixin, View):
     """设置地址标题"""
 
     def put(self, request, address_id):
@@ -573,9 +576,6 @@ class UpdateTitleAddressView(View):
 
         # 4.响应删除地址结果
         return http.JsonResponse({'code': RETCODE.OK, 'errmsg': '设置地址标题成功'})
-
-
-
 
 
 class ChangePasswordView(LoginRequiredMixin, View):
@@ -620,3 +620,63 @@ class ChangePasswordView(LoginRequiredMixin, View):
 
         # # 响应密码修改结果：重定向到登录界面
         return response
+
+
+
+
+class UserBrowseHistory(LoginRequiredJSONMixin, View):
+    """用户浏览记录"""
+
+    def post(self, request):
+
+        print('保存浏览记录')
+
+        """保存用户浏览记录"""
+        # 接收参数
+        json_dict = json.loads(request.body.decode())
+        sku_id = json_dict.get('sku_id')
+
+        # 校验参数:
+        try:
+            SKU.objects.get(id=sku_id)
+        except SKU.DoesNotExist:
+            return http.HttpResponseForbidden('sku不存在')
+
+        # 保存用户浏览数据
+        redis_conn = get_redis_connection('history')
+        pl = redis_conn.pipeline()
+        user_id = request.user.id
+
+        # 先去重: 这里给 0 代表去除所有的 sku_id
+        pl.lrem('history_%s' % user_id, 0, sku_id)
+        # 再存储
+        pl.lpush('history_%s' % user_id, sku_id)
+        # 最后截取: 界面有限, 只保留 5 个
+        pl.ltrim('history_%s' % user_id, 0, 4)
+        # 执行管道
+        pl.execute()
+
+        # 响应结果
+        return http.JsonResponse({'code': RETCODE.OK, 'errmsg': 'OK'})
+
+    def get(self, request):
+
+        print("加载浏览记录")
+
+        """获取用户浏览记录"""
+        # 获取Redis存储的sku_id列表信息
+        redis_conn = get_redis_connection('history')
+        sku_ids = redis_conn.lrange('history_%s' % request.user.id, 0, -1)
+
+        # 根据sku_ids列表数据，查询出商品sku信息
+        skus = []
+        for sku_id in sku_ids:
+            sku = SKU.objects.get(id=sku_id)
+            skus.append({
+                'id': sku.id,
+                'name': sku.name,
+                'default_image_url': sku.default_image_url,
+                'price': sku.price
+            })
+
+        return http.JsonResponse({'code': RETCODE.OK, 'errmsg': 'OK', 'skus': skus})
